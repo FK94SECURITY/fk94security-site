@@ -116,116 +116,102 @@ export function FaqSection() {
   }
 
   return (
-    <section id="faq" className="section-space border-t border-line/50">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <p className="text-sm font-semibold uppercase tracking-widest text-accent">
-          {locale === "es" ? "Preguntas frecuentes" : "FAQ"}
-        </p>
-        <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">
-          {locale === "es"
-            ? "Preguntas comunes, respuestas directas."
-            : "Common questions, straight answers."}
-        </h2>
-        <p className="mt-4 max-w-2xl text-base leading-7 text-muted">
-          {locale === "es"
-            ? "Si tu pregunta no está acá, escribinos por el formulario de contacto o reservá una sesión."
-            : "If your question is not here, reach out through the contact form or book a session."}
-        </p>
-
-        {/* Search */}
-        <div className="relative mt-8">
-          <svg
-            className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-          <input
-            type="text"
-            placeholder={locale === "es" ? "Buscar preguntas..." : "Search questions..."}
-            value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              setOpenIndex(null);
-            }}
-            className="w-full rounded-xl border border-line bg-card py-3 pl-11 pr-4 text-sm text-ink placeholder:text-muted/60 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-accent/20"
+    <div>
+      {/* Search */}
+      <div className="relative mb-6">
+        <svg
+          className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
           />
-        </div>
+        </svg>
+        <input
+          type="text"
+          placeholder={
+            locale === "es" ? "Buscar preguntas..." : "Search questions..."
+          }
+          value={searchQuery}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setOpenIndex(null);
+          }}
+          className="w-full rounded-xl border border-line bg-card py-3 pl-11 pr-4 text-sm text-ink placeholder:text-muted/60 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-accent/20"
+        />
+      </div>
 
-        {/* FAQ list */}
-        <div className="mt-8 space-y-3">
-          {filtered.length === 0 ? (
-            <div className="rounded-xl border border-line bg-card p-6 text-center">
-              <p className="text-sm text-muted">
-                {locale === "es"
-                  ? "No se encontraron preguntas. Probá con otro término."
-                  : "No matching questions found. Try a different search term."}
-              </p>
-            </div>
-          ) : (
-            filtered.map((item) => {
-              const actualIndex = items.indexOf(item);
-              const isOpen = openIndex === actualIndex;
-              return (
-                <div
-                  key={actualIndex}
-                  className="rounded-xl border border-line bg-card transition-colors hover:border-accent/20"
+      {/* FAQ list */}
+      <div className="space-y-3">
+        {filtered.length === 0 ? (
+          <div className="rounded-xl border border-line bg-card p-6 text-center">
+            <p className="text-sm text-muted">
+              {locale === "es"
+                ? "No se encontraron preguntas. Prob\u00e1 con otro t\u00e9rmino."
+                : "No matching questions found. Try a different search term."}
+            </p>
+          </div>
+        ) : (
+          filtered.map((item) => {
+            const actualIndex = items.indexOf(item);
+            const isOpen = openIndex === actualIndex;
+            return (
+              <div
+                key={actualIndex}
+                className="rounded-xl border border-line bg-card transition-colors hover:border-accent/20"
+              >
+                <button
+                  type="button"
+                  onClick={() => toggle(actualIndex)}
+                  className="flex w-full items-center justify-between px-6 py-5 text-left"
+                  aria-expanded={isOpen}
                 >
-                  <button
-                    type="button"
-                    onClick={() => toggle(actualIndex)}
-                    className="flex w-full items-center justify-between px-6 py-5 text-left"
-                    aria-expanded={isOpen}
-                  >
-                    <span className="pr-4 text-sm font-semibold text-ink sm:text-base">
-                      {item.q}
-                    </span>
-                    <span
-                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line text-muted transition-transform duration-300 ${
-                        isOpen ? "rotate-45 border-accent/40 text-accent" : ""
-                      }`}
-                    >
-                      <svg
-                        className="h-3.5 w-3.5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M12 4v16m8-8H4"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                  <div
-                    className={`grid transition-all duration-300 ease-in-out ${
-                      isOpen
-                        ? "grid-rows-[1fr] opacity-100"
-                        : "grid-rows-[0fr] opacity-0"
+                  <span className="pr-4 text-sm font-semibold text-ink sm:text-base">
+                    {item.q}
+                  </span>
+                  <span
+                    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line text-muted transition-transform duration-300 ${
+                      isOpen ? "rotate-45 border-accent/40 text-accent" : ""
                     }`}
                   >
-                    <div className="overflow-hidden">
-                      <p className="border-t border-line/50 px-6 pb-5 pt-4 text-sm leading-7 text-muted">
-                        {item.a}
-                      </p>
-                    </div>
+                    <svg
+                      className="h-3.5 w-3.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 4v16m8-8H4"
+                      />
+                    </svg>
+                  </span>
+                </button>
+                <div
+                  className={`grid transition-all duration-300 ease-in-out ${
+                    isOpen
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="border-t border-line/50 px-6 pb-5 pt-4 text-sm leading-7 text-muted">
+                      {item.a}
+                    </p>
                   </div>
                 </div>
-              );
-            })
-          )}
-        </div>
+              </div>
+            );
+          })
+        )}
       </div>
-    </section>
+    </div>
   );
 }
