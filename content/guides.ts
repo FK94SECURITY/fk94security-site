@@ -259,6 +259,283 @@ export const guides: Guide[] = [
     ],
     takeaway: "Good crypto OPSEC is usually quieter, slower, and less convenient than bad crypto OPSEC.",
   },
+  {
+    slug: "social-media-privacy-settings",
+    title: "Social Media Privacy Settings That Actually Matter",
+    description: "A platform-by-platform guide to the privacy settings worth changing on Instagram, Twitter/X, Facebook, LinkedIn, and TikTok.",
+    category: "Social Media",
+    readTime: "10 min read",
+    level: "beginner" as const,
+    tags: ["privacy", "social-media", "beginner"],
+    intro:
+      "Social media platforms are designed to share as much as possible by default. Most people never touch their privacy settings, which means their location, contacts, search history, and activity are more public than they realize.",
+    sections: [
+      {
+        heading: "Instagram",
+        paragraphs: [
+          "Instagram shares a lot by default: your activity status, read receipts, story views, and tagged photos. Most of these can be limited without affecting how you use the app.",
+        ],
+        bullets: [
+          "Switch to a private account if you do not need public reach (Settings > Privacy > Private Account)",
+          "Turn off Activity Status so people cannot see when you are online",
+          "Disable sharing to other apps (Facebook, Twitter) unless intentional",
+          "Review tagged photos before they appear on your profile (Settings > Privacy > Tags > Manually Approve Tags)",
+          "Limit who can message you (Settings > Privacy > Messages)",
+        ],
+      },
+      {
+        heading: "Twitter / X",
+        paragraphs: [
+          "Twitter exposes your likes, follows, and location by default. It also shares data with advertisers unless you explicitly opt out.",
+        ],
+        bullets: [
+          "Disable location on tweets (Settings > Privacy and Safety > Location Information)",
+          "Turn off Discoverability by email and phone number",
+          "Review and clean up Connected Apps (Settings > Security > Apps and Sessions)",
+          "Disable personalized ads (Settings > Privacy and Safety > Ads Preferences)",
+          "Protect your tweets if you want a private account",
+        ],
+      },
+      {
+        heading: "Facebook",
+        paragraphs: [
+          "Facebook has the most granular privacy settings of any platform, but the defaults are all set to maximum exposure. Worth spending 15 minutes here.",
+        ],
+        bullets: [
+          "Change default post audience to Friends Only (Settings > Privacy > Who can see your future posts)",
+          "Limit who can look you up by email or phone number (Settings > Privacy)",
+          "Review what info is public on your profile (About section, friends list, photos)",
+          "Turn off face recognition (Settings > Face Recognition)",
+          "Review app permissions and remove old apps (Settings > Apps and Websites)",
+        ],
+      },
+      {
+        heading: "LinkedIn",
+        paragraphs: [
+          "LinkedIn is often overlooked because it feels professional, but it exposes your job history, connections, and activity to anyone by default.",
+        ],
+        bullets: [
+          "Control your public profile visibility (Settings > Visibility > Edit your public profile)",
+          "Disable activity broadcasts for connection changes and profile edits",
+          "Turn off profile viewing notifications if you want to browse privately",
+          "Review who can see your connections (Settings > Visibility > Who can see your connections)",
+          "Disable data sharing with third-party apps",
+        ],
+      },
+      {
+        heading: "TikTok",
+        paragraphs: [
+          "TikTok collects a lot of data and most of it is shared with advertisers. The privacy settings are limited, but worth configuring.",
+        ],
+        bullets: [
+          "Set account to private if you do not create public content",
+          "Disable personalized ads (Settings > Privacy > Personalization and Data)",
+          "Turn off Allow Others to Find Me (Settings > Privacy)",
+          "Disable downloads of your videos",
+          "Review and revoke third-party app access regularly",
+        ],
+      },
+    ],
+    takeaway: "Most social media privacy improvements take 5 minutes per platform and make a real difference in how much of your life is publicly visible.",
+  },
+  {
+    slug: "browser-security-basics",
+    title: "Browser Security Basics",
+    description: "How to set up your browser for better privacy and security without breaking the web.",
+    category: "Devices",
+    readTime: "8 min read",
+    level: "beginner" as const,
+    tags: ["devices", "privacy", "beginner"],
+    intro:
+      "Your browser is your window to the internet and also the biggest source of tracking, fingerprinting, and data leakage. A few changes to your browser setup can significantly reduce your exposure.",
+    sections: [
+      {
+        heading: "Choose a better default browser",
+        paragraphs: [
+          "Not all browsers are equal when it comes to privacy. Chrome is the most popular but also the most aggressive in tracking. Firefox and Brave offer better privacy defaults out of the box.",
+          "If you are not ready to switch, at least configure your current browser properly.",
+        ],
+        bullets: [
+          "Firefox: Best balance of privacy and compatibility. Enable Enhanced Tracking Protection (Strict mode)",
+          "Brave: Built-in ad blocking and tracker blocking. Good for most people",
+          "Safari: Decent privacy on Apple devices. Enable Hide IP from Trackers",
+          "Chrome: If you must use it, install uBlock Origin and configure privacy settings",
+        ],
+      },
+      {
+        heading: "Essential browser settings",
+        paragraphs: [
+          "These settings apply to most browsers and significantly reduce tracking and data exposure.",
+        ],
+        bullets: [
+          "Block third-party cookies (most browsers have this option)",
+          "Disable autofill for payment methods and addresses",
+          "Clear cookies and site data on browser close (or use containers)",
+          "Disable search suggestions that send every keystroke to the search engine",
+          "Use a privacy-respecting search engine (DuckDuckGo, Startpage, Brave Search)",
+          "Enable HTTPS-Only mode",
+        ],
+      },
+      {
+        heading: "Extensions worth installing",
+        paragraphs: [
+          "Less is more with extensions. Every extension has access to your browsing data. Only install what you need from trusted sources.",
+        ],
+        bullets: [
+          "uBlock Origin: The best ad and tracker blocker. Free and open source",
+          "Bitwarden: Password manager extension for autofilling credentials securely",
+          "ClearURLs: Removes tracking parameters from URLs",
+          "Skip Redirect: Bypasses unnecessary redirect tracking pages",
+          "Do not install random extensions that promise extra features. Most are data harvesters",
+        ],
+      },
+      {
+        heading: "Habits that matter",
+        paragraphs: [
+          "Good browser hygiene is about habits, not just settings. Small changes in how you browse make a big difference.",
+        ],
+        bullets: [
+          "Use private/incognito mode for one-off searches and logins",
+          "Do not save passwords in the browser. Use a dedicated password manager",
+          "Log out of accounts when you are done, especially on shared devices",
+          "Review your extensions periodically and remove anything you do not use",
+          "Be suspicious of browser notifications. Most are spam",
+        ],
+      },
+    ],
+    takeaway: "A well-configured browser with one or two good extensions does more for your privacy than any VPN subscription.",
+  },
+  {
+    slug: "password-manager-guide",
+    title: "Why You Need a Password Manager and How to Set One Up",
+    description: "A step-by-step guide to choosing and setting up a password manager for the first time.",
+    category: "Accounts",
+    readTime: "7 min read",
+    level: "beginner" as const,
+    tags: ["accounts", "beginner", "passwords"],
+    intro:
+      "Using the same password everywhere is the single biggest security mistake most people make. A password manager fixes this by generating and storing unique passwords for every account.",
+    sections: [
+      {
+        heading: "Why password reuse is dangerous",
+        paragraphs: [
+          "When one service gets breached, attackers try those credentials on every other service. This is called credential stuffing, and it works because most people reuse passwords.",
+          "A password manager eliminates this risk by generating a unique, strong password for every account. You only need to remember one master password.",
+        ],
+      },
+      {
+        heading: "Which password manager to choose",
+        paragraphs: [
+          "There are several good options. The best one is the one you will actually use consistently.",
+        ],
+        bullets: [
+          "Bitwarden: Free, open source, works on all platforms. Best choice for most people",
+          "1Password: Polished, great family sharing. Paid but worth it if you prefer it",
+          "KeePassXC: Offline, open source, for people who want full control. More technical",
+          "Apple Passwords: Built into iOS/Mac. Good if you are fully in the Apple ecosystem",
+          "Avoid LastPass. Their security track record is poor",
+        ],
+      },
+      {
+        heading: "Setting up for the first time",
+        paragraphs: [
+          "Getting started is easier than most people think. You do not need to migrate everything at once.",
+        ],
+        bullets: [
+          "Install the app and browser extension on all your devices",
+          "Create a strong master password (long passphrase, at least 4 random words)",
+          "Write down your master password and recovery key, store them physically (not digitally)",
+          "Start by saving passwords as you log in to sites naturally. No need to change everything on day one",
+          "Over the next week, change passwords for your most important accounts (email, banking, cloud)",
+          "Enable 2FA on your password manager account itself",
+        ],
+      },
+      {
+        heading: "Common mistakes to avoid",
+        paragraphs: [
+          "A password manager is only as good as how you use it. Avoid these common pitfalls.",
+        ],
+        bullets: [
+          "Do not use a weak master password. This is the one password that needs to be strong and memorable",
+          "Do not store your master password digitally (no notes app, no Google Doc)",
+          "Do not share passwords by copying and pasting in chat. Use the password manager's sharing feature",
+          "Do not ignore the recovery key. If you lose your master password without it, your vault is gone",
+          "Do not keep using the browser's built-in password save. Use the password manager extension instead",
+        ],
+      },
+    ],
+    takeaway: "A password manager is the single highest-impact security improvement most people can make. Start with Bitwarden, it is free and takes 10 minutes to set up.",
+  },
+  {
+    slug: "two-factor-authentication-guide",
+    title: "Two-Factor Authentication: What to Use and What to Avoid",
+    description: "A clear guide to 2FA methods, from SMS codes to hardware keys, and which ones actually protect you.",
+    category: "Accounts",
+    readTime: "8 min read",
+    level: "beginner" as const,
+    tags: ["accounts", "beginner", "2fa"],
+    intro:
+      "Two-factor authentication adds a second layer of security to your accounts. But not all 2FA methods are equal. Some are barely better than nothing, while others make your accounts nearly impossible to break into.",
+    sections: [
+      {
+        heading: "The 2FA methods ranked",
+        paragraphs: [
+          "From weakest to strongest, here are the main 2FA methods and what they protect against.",
+        ],
+        bullets: [
+          "SMS codes: Better than nothing, but vulnerable to SIM swapping and interception. Use only as a last resort",
+          "Email codes: Slightly better than SMS, but if your email is compromised, so is your 2FA",
+          "Authenticator apps (TOTP): Google Authenticator, Authy, or Bitwarden built-in. Good protection for most people",
+          "Push notifications: Like the Google Prompt or Microsoft Authenticator push. Convenient and reasonably secure",
+          "Hardware security keys: YubiKey, Google Titan. The strongest option. Phishing-resistant by design",
+          "Passkeys: The newest option. Combines the convenience of biometrics with the security of hardware keys",
+        ],
+      },
+      {
+        heading: "Which accounts to protect first",
+        paragraphs: [
+          "Not all accounts need the same level of protection. Focus your strongest 2FA on the accounts that control everything else.",
+        ],
+        bullets: [
+          "Email (Gmail, Outlook): This is the master key. If someone controls your email, they can reset every other password. Use the strongest 2FA you can here",
+          "Cloud storage (Google Drive, iCloud): Contains personal documents, photos, and sometimes credentials",
+          "Banking and financial: Banks usually support SMS or app-based 2FA. Use the app if available",
+          "Password manager: Enable 2FA on your vault. This protects all your other passwords",
+          "Social media: Less critical but still worth enabling, especially if you have a public presence",
+          "Crypto exchanges: Must-have. Use authenticator app or hardware key, never SMS",
+        ],
+      },
+      {
+        heading: "Setting up an authenticator app",
+        paragraphs: [
+          "If you are starting from zero, an authenticator app is the best balance of security and convenience for most people.",
+        ],
+        bullets: [
+          "Download an authenticator app (Bitwarden authenticator, Google Authenticator, or Authy)",
+          "Go to your account's security settings and enable two-factor authentication",
+          "Scan the QR code with the authenticator app",
+          "Save the backup codes. Print them or write them down. Store them physically, not in your email",
+          "Test the setup by logging out and back in",
+          "Repeat for each important account",
+        ],
+      },
+      {
+        heading: "Backup codes are critical",
+        paragraphs: [
+          "The most common 2FA disaster is getting locked out of your own accounts because you lost your phone and did not save backup codes.",
+          "Every service that offers 2FA also offers backup codes. These are one-time-use codes that let you in if you lose your device. Save them. Print them. Put them somewhere safe.",
+        ],
+        bullets: [
+          "Save backup codes when you first enable 2FA",
+          "Store them physically (printed, in a safe place) not in your email",
+          "If you get a new phone, transfer your authenticator app before wiping the old one",
+          "Authy and Bitwarden sync across devices, which reduces the risk of lockout",
+          "Consider a hardware key as a backup 2FA method for your most important accounts",
+        ],
+      },
+    ],
+    takeaway: "The best 2FA is the one you will actually use. Start with an authenticator app on your email and password manager, then expand to other accounts.",
+  },
 ];
 
 export const guideCategories = [
