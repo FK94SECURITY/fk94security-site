@@ -32,8 +32,8 @@ export default async function GetHelpThanksPage({ searchParams }: PageProps) {
     <>
       <section className="pb-10 pt-14 sm:pb-14 sm:pt-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <p className="font-display text-sm uppercase tracking-[0.34em] text-brand">Thank you</p>
-          <h1 className="mt-5 max-w-2xl font-display text-5xl leading-[0.96] text-ink sm:text-6xl">
+          <p className="text-sm font-bold uppercase tracking-[0.34em] text-accent">Thank you</p>
+          <h1 className="mt-5 max-w-2xl text-5xl font-bold leading-[0.96] text-ink sm:text-6xl">
             We got your message.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">
@@ -45,7 +45,7 @@ export default async function GetHelpThanksPage({ searchParams }: PageProps) {
 
       <section className="pb-20 sm:pb-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-[1.8rem] border border-line bg-white p-6 sm:p-8">
+          <div className="rounded-xl border border-line bg-card p-6 sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">Suggested path</p>
             <p className="mt-3 text-lg font-semibold text-ink">{params.service ?? "Privacy Review"}</p>
             <p className="mt-2 text-sm leading-7 text-muted">

@@ -21,8 +21,8 @@ export default async function GetHelpPage({ searchParams }: PageProps) {
     <>
       <section className="pb-10 pt-14 sm:pb-14 sm:pt-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <p className="font-display text-sm uppercase tracking-[0.34em] text-brand">Get Help</p>
-          <h1 className="mt-5 max-w-2xl font-display text-5xl leading-[0.96] text-ink sm:text-6xl">
+          <p className="text-sm font-bold uppercase tracking-[0.34em] text-accent">Get Help</p>
+          <h1 className="mt-5 max-w-2xl text-5xl font-bold leading-[0.96] text-ink sm:text-6xl">
             Tell us what is going on.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">

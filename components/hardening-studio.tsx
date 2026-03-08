@@ -150,9 +150,9 @@ export function HardeningStudio() {
 
   return (
     <div className="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
-      <section className="panel rounded-[2rem] border border-line p-6 sm:p-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-brand">Planner inputs</p>
-        <h3 className="mt-3 font-display text-2xl text-ink">Account hardening planner</h3>
+      <section className="rounded-xl border border-line bg-card p-6 sm:p-8">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Planner inputs</p>
+        <h3 className="mt-3 text-2xl font-bold text-ink">Account hardening planner</h3>
         <p className="mt-3 text-sm leading-7 text-muted">
           Describe your current setup and FK94 turns it into a calmer sequence of fixes. No login,
           no fear tactics, no fake score.
@@ -171,8 +171,8 @@ export function HardeningStudio() {
                     className={cn(
                       "rounded-full px-4 py-2 text-sm font-medium transition",
                       state[key] === option
-                        ? "bg-ink text-sand"
-                        : "border border-line bg-white/70 text-ink hover:border-ink/30",
+                        ? "bg-accent text-black"
+                        : "border border-line bg-card/80 text-ink hover:border-accent/30",
                     )}
                   >
                     {option}
@@ -184,11 +184,11 @@ export function HardeningStudio() {
         </div>
       </section>
 
-      <section className="dark-panel rounded-[2rem] border border-black/10 p-6 sm:p-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-signal">Suggested plan</p>
-        <div className="mt-5 rounded-[1.6rem] border border-white/10 bg-white/6 p-5">
-          <p className="text-xs uppercase tracking-[0.2em] text-sand/54">Current setup read</p>
-          <p className="mt-3 text-sm leading-7 text-sand/76">
+      <section className="rounded-xl border border-accent/20 bg-accent/5 p-6 sm:p-8">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Suggested plan</p>
+        <div className="mt-5 rounded-xl border border-line bg-card p-5">
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">Current setup read</p>
+          <p className="mt-3 text-sm leading-7 text-muted">
             {state.setupStyle} around {state.primaryAccount}, {state.supportModel.toLowerCase()},
             {" "}{state.publicExposure.toLowerCase()} exposure, and recovery that is{" "}
             {state.recoveryState.toLowerCase()}.
@@ -197,13 +197,13 @@ export function HardeningStudio() {
 
         <div className="mt-6 space-y-4">
           {groups.map((group) => (
-            <div key={group.title} className="rounded-[1.6rem] border border-white/10 bg-white/5 p-5">
-              <p className="text-xs uppercase tracking-[0.22em] text-sand/54">{group.title}</p>
+            <div key={group.title} className="rounded-xl border border-line bg-card p-5">
+              <p className="text-xs uppercase tracking-[0.22em] text-muted">{group.title}</p>
               <div className="mt-4 space-y-4">
                 {group.items.map((item) => (
-                  <div key={item.title} className="rounded-[1.2rem] border border-white/10 bg-black/12 p-4">
-                    <p className="text-sm font-semibold text-sand">{item.title}</p>
-                    <p className="mt-2 text-sm leading-6 text-sand/72">{item.detail}</p>
+                  <div key={item.title} className="rounded-xl border border-line bg-background/50 p-4">
+                    <p className="text-sm font-semibold text-ink">{item.title}</p>
+                    <p className="mt-2 text-sm leading-6 text-muted">{item.detail}</p>
                   </div>
                 ))}
               </div>
@@ -211,7 +211,7 @@ export function HardeningStudio() {
           ))}
         </div>
 
-        <div className="mt-6 rounded-[1.6rem] border border-signal/30 bg-signal/10 p-5 text-sm leading-7 text-sand">
+        <div className="mt-6 rounded-xl border border-accent/30 bg-accent/10 p-5 text-sm leading-7 text-ink">
           {serviceNudge}
         </div>
       </section>

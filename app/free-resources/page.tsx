@@ -22,8 +22,8 @@ export default function FreeResourcesPage() {
     <>
       <section className="pb-18 pt-14 sm:pb-20 sm:pt-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <p className="font-display text-sm uppercase tracking-[0.34em] text-brand">Free Resources</p>
-          <h1 className="mt-5 max-w-4xl font-display text-5xl leading-[0.96] text-ink sm:text-6xl">
+          <p className="text-sm font-bold uppercase tracking-[0.34em] text-accent">Free Resources</p>
+          <h1 className="mt-5 max-w-4xl text-5xl font-bold leading-[0.96] text-ink sm:text-6xl">
             A simpler starting point.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">
@@ -61,7 +61,7 @@ export default function FreeResourcesPage() {
             <SectionHeading eyebrow="Templates" title="Templates" body="Simple assets you can reuse." />
             <div className="mt-8 space-y-3">
               {templateAssets.map((resource) => (
-                <div key={resource.slug} className="rounded-[1.4rem] border border-line bg-white px-5 py-4">
+                <div key={resource.slug} className="rounded-xl border border-line bg-card px-5 py-4">
                   <p className="text-sm font-semibold text-ink">{resource.title}</p>
                   <p className="mt-1 text-sm leading-7 text-muted">{resource.description}</p>
                 </div>
@@ -77,7 +77,7 @@ export default function FreeResourcesPage() {
                   href={repo.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="block rounded-[1.4rem] border border-line bg-white px-5 py-4 transition hover:border-ink/30"
+                  className="block rounded-xl border border-line bg-card px-5 py-4 transition hover:border-accent/30"
                 >
                   <p className="text-sm font-semibold text-ink">{repo.name}</p>
                   <p className="mt-1 text-sm leading-7 text-muted">{repo.description}</p>

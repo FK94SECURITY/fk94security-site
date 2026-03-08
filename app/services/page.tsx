@@ -16,8 +16,8 @@ export default function ServicesPage() {
     <>
       <section className="pb-14 pt-14 sm:pb-18 sm:pt-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <p className="font-display text-sm uppercase tracking-[0.34em] text-brand">Consulting</p>
-          <h1 className="mt-5 max-w-4xl font-display text-5xl leading-[0.96] text-ink sm:text-6xl">
+          <p className="text-sm font-bold uppercase tracking-[0.34em] text-accent">Consulting</p>
+          <h1 className="mt-5 max-w-4xl text-5xl font-bold leading-[0.96] text-ink sm:text-6xl">
             Private help when you need it.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">
@@ -39,7 +39,7 @@ export default function ServicesPage() {
 
       <section className="pb-20 sm:pb-24">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-[1.8rem] border border-line bg-white p-6 sm:p-8">
+          <div className="rounded-xl border border-line bg-card p-6 sm:p-8">
             <SectionHeading
               eyebrow="How it works"
               title="Simple process."
@@ -48,7 +48,7 @@ export default function ServicesPage() {
             <div className="mt-8">
               <Link
                 href="/get-help"
-                className="rounded-full bg-ink px-5 py-3 text-sm font-semibold text-sand transition hover:bg-brand-strong"
+                className="rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-black transition hover:bg-accent-strong"
               >
                 Get Help
               </Link>

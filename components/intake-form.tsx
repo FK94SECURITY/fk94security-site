@@ -68,14 +68,14 @@ export function IntakeForm({ defaultHelpType }: { defaultHelpType?: string }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="panel rounded-[2rem] border border-line p-6 sm:p-8">
+    <form onSubmit={handleSubmit} className="rounded-xl border border-line bg-card p-6 sm:p-8">
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Name">
           <input
             required
             value={payload.name}
             onChange={(event) => setPayload((current) => ({ ...current, name: event.target.value }))}
-            className="w-full rounded-2xl border border-line bg-white/70 px-4 py-3 text-sm text-ink outline-none focus:border-ink/30"
+            className="w-full rounded-2xl border border-line bg-background px-4 py-3 text-sm text-ink outline-none focus:border-accent/30"
           />
         </Field>
         <Field label="Email">
@@ -84,7 +84,7 @@ export function IntakeForm({ defaultHelpType }: { defaultHelpType?: string }) {
             type="email"
             value={payload.email}
             onChange={(event) => setPayload((current) => ({ ...current, email: event.target.value }))}
-            className="w-full rounded-2xl border border-line bg-white/70 px-4 py-3 text-sm text-ink outline-none focus:border-ink/30"
+            className="w-full rounded-2xl border border-line bg-background px-4 py-3 text-sm text-ink outline-none focus:border-accent/30"
           />
         </Field>
       </div>
@@ -97,7 +97,7 @@ export function IntakeForm({ defaultHelpType }: { defaultHelpType?: string }) {
               setPayload((current) => ({ ...current, countryTimezone: event.target.value }))
             }
             placeholder="e.g. Argentina, US East Coast"
-            className="w-full rounded-2xl border border-line bg-white/70 px-4 py-3 text-sm text-ink outline-none placeholder:text-muted focus:border-ink/30"
+            className="w-full rounded-2xl border border-line bg-background px-4 py-3 text-sm text-ink outline-none placeholder:text-muted focus:border-accent/30"
           />
         </Field>
         <Field label="What do you need help with?">
@@ -106,7 +106,7 @@ export function IntakeForm({ defaultHelpType }: { defaultHelpType?: string }) {
             onChange={(event) =>
               setPayload((current) => ({ ...current, helpType: event.target.value }))
             }
-            className="w-full rounded-2xl border border-line bg-white/70 px-4 py-3 text-sm text-ink outline-none focus:border-ink/30"
+            className="w-full rounded-2xl border border-line bg-background px-4 py-3 text-sm text-ink outline-none focus:border-accent/30"
           >
             {intakeOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -126,7 +126,7 @@ export function IntakeForm({ defaultHelpType }: { defaultHelpType?: string }) {
                 urgency: event.target.value as IntakePayload["urgency"],
               }))
             }
-            className="w-full rounded-2xl border border-line bg-white/70 px-4 py-3 text-sm text-ink outline-none focus:border-ink/30"
+            className="w-full rounded-2xl border border-line bg-background px-4 py-3 text-sm text-ink outline-none focus:border-accent/30"
           >
             {urgencyOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -141,7 +141,7 @@ export function IntakeForm({ defaultHelpType }: { defaultHelpType?: string }) {
             onChange={(event) =>
               setPayload((current) => ({ ...current, usedResources: event.target.value }))
             }
-            className="w-full rounded-2xl border border-line bg-white/70 px-4 py-3 text-sm text-ink outline-none focus:border-ink/30"
+            className="w-full rounded-2xl border border-line bg-background px-4 py-3 text-sm text-ink outline-none focus:border-accent/30"
           >
             <option value="no">No</option>
             <option value="yes">Yes</option>
@@ -156,7 +156,7 @@ export function IntakeForm({ defaultHelpType }: { defaultHelpType?: string }) {
             value={payload.details}
             onChange={(event) => setPayload((current) => ({ ...current, details: event.target.value }))}
             placeholder="Describe your situation briefly. The more context, the better we can help."
-            className="w-full rounded-[1.6rem] border border-line bg-white/70 px-4 py-3 text-sm leading-7 text-ink outline-none placeholder:text-muted focus:border-ink/30"
+            className="w-full rounded-[1.6rem] border border-line bg-background px-4 py-3 text-sm leading-7 text-ink outline-none placeholder:text-muted focus:border-accent/30"
           />
         </Field>
       </div>
@@ -167,7 +167,7 @@ export function IntakeForm({ defaultHelpType }: { defaultHelpType?: string }) {
         <button
           type="submit"
           disabled={loading}
-          className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-sand transition hover:bg-brand-strong disabled:cursor-not-allowed disabled:opacity-70"
+          className="rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-black transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-70"
         >
           {loading ? "Sending..." : "Send"}
         </button>

@@ -342,13 +342,13 @@ const priorityMeta: Record<Priority, { label: string; accent: string; badge: str
   },
   Important: {
     label: "Important",
-    accent: "border-brand/20 bg-brand/4",
-    badge: "bg-brand/12 text-brand",
+    accent: "border-accent/20 bg-accent/5",
+    badge: "bg-accent/10 text-accent",
   },
   Recommended: {
     label: "Recommended",
-    accent: "border-line bg-white/50",
-    badge: "bg-ink/6 text-muted",
+    accent: "border-line bg-card/50",
+    badge: "bg-card text-muted",
   },
 };
 
@@ -427,13 +427,13 @@ export function DeviceChecklist() {
   return (
     <div className="space-y-6">
       {/* ---- Header panel ---- */}
-      <section className="panel rounded-[2rem] border border-line p-6 sm:p-8">
+      <section className="rounded-xl border border-line bg-card p-6 sm:p-8">
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="font-display text-xs uppercase tracking-[0.3em] text-brand">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
               Progress
             </p>
-            <h3 className="mt-3 font-display text-2xl text-ink">
+            <h3 className="mt-3 text-2xl font-bold text-ink">
               {platformLabels[platform]} hardening
             </h3>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
@@ -443,9 +443,9 @@ export function DeviceChecklist() {
             </p>
           </div>
 
-          <div className="rounded-[1.6rem] border border-line bg-white/70 px-5 py-4">
+          <div className="rounded-xl border border-line bg-card/80 px-5 py-4">
             <p className="text-xs uppercase tracking-[0.24em] text-muted">Completion</p>
-            <p className="mt-2 font-display text-4xl text-ink">
+            <p className="mt-2 text-4xl font-bold text-ink">
               {completed}
               <span className="text-xl text-muted">/{total}</span>
             </p>
@@ -454,9 +454,9 @@ export function DeviceChecklist() {
 
         {/* progress bar */}
         <div className="mt-6">
-          <div className="h-2 w-full overflow-hidden rounded-full bg-ink/8">
+          <div className="h-2 w-full overflow-hidden rounded-full bg-line">
             <div
-              className="h-full rounded-full bg-brand transition-all duration-500"
+              className="h-full rounded-full bg-accent transition-all duration-500"
               style={{ width: `${pct}%` }}
             />
           </div>
@@ -477,13 +477,13 @@ export function DeviceChecklist() {
                 className={cn(
                   "rounded-full px-4 py-2 text-sm font-medium transition",
                   active
-                    ? "bg-ink text-sand"
-                    : "border border-line bg-white/70 text-ink hover:border-ink/30",
+                    ? "bg-accent text-black"
+                    : "border border-line bg-card/80 text-ink hover:border-accent/30",
                 )}
               >
                 {platformLabels[key]}
                 {hydrated && (
-                  <span className={cn("ml-2 text-xs", active ? "text-sand/60" : "text-muted")}>
+                  <span className={cn("ml-2 text-xs", active ? "text-black/60" : "text-muted")}>
                     {platformDone}/{platformTotal}
                   </span>
                 )}
@@ -499,7 +499,7 @@ export function DeviceChecklist() {
         return (
           <section
             key={group.priority}
-            className="panel rounded-[2rem] border border-line p-6 sm:p-8"
+            className="rounded-xl border border-line bg-card p-6 sm:p-8"
           >
             <div className="flex items-center gap-3">
               <span
@@ -525,10 +525,10 @@ export function DeviceChecklist() {
                     type="button"
                     onClick={() => toggle(item.id)}
                     className={cn(
-                      "rounded-[1.4rem] border p-5 text-left transition",
+                      "rounded-xl border p-5 text-left transition",
                       isDone
-                        ? "border-ink bg-ink text-sand shadow-[0_18px_40px_rgba(18,25,33,0.16)]"
-                        : cn("hover:border-ink/30", meta.accent),
+                        ? "border-accent/30 bg-accent/10 text-ink shadow-[0_8px_30px_rgba(16,185,129,0.06)]"
+                        : cn("hover:border-accent/30", meta.accent),
                     )}
                   >
                     <div className="flex items-start gap-3">
@@ -537,8 +537,8 @@ export function DeviceChecklist() {
                         className={cn(
                           "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border text-xs transition",
                           isDone
-                            ? "border-sand/30 bg-sand/20 text-sand"
-                            : "border-line bg-white text-transparent",
+                            ? "border-accent/30 bg-accent/20 text-accent"
+                            : "border-line bg-card text-transparent",
                         )}
                       >
                         {isDone ? "\u2713" : ""}
@@ -549,7 +549,7 @@ export function DeviceChecklist() {
                         <p
                           className={cn(
                             "mt-1.5 text-xs leading-5",
-                            isDone ? "text-sand/60" : "text-muted",
+                            isDone ? "text-muted" : "text-muted",
                           )}
                         >
                           {item.howTo}

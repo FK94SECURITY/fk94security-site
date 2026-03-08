@@ -1,89 +1,85 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
-
-import { LogoMark } from "@/components/logo-mark";
-import { navLinks } from "@/content/site";
-import { cn } from "@/lib/utils";
-
-function isActive(pathname: string, href: string) {
-  return href === "/" ? pathname === "/" : pathname.startsWith(href);
-}
+import { useLocale } from "@/lib/locale-context";
 
 export function SiteHeader() {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { locale, setLocale, t } = useLocale();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line/80 bg-background/96 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
-        <LogoMark />
-        <nav className="hidden items-center gap-5 lg:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "text-sm font-medium transition",
-                isActive(pathname, link.href)
-                  ? "text-ink"
-                  : "text-ink/62 hover:text-ink",
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
+    <header className="fixed top-0 z-50 w-full border-b border-line/50 bg-background/80 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <Link href="/" className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent">
+            <span className="text-sm font-bold text-black">FK</span>
+          </div>
+          <span className="text-lg font-bold text-ink">FK94</span>
+          <span className="text-lg font-light text-muted">Security</span>
+        </Link>
+
+        <nav className="hidden items-center gap-6 lg:flex">
+          <a href="#services" className="text-sm text-muted transition hover:text-ink">{t.nav.services}</a>
+          <a href="#tools" className="text-sm text-muted transition hover:text-ink">{t.nav.tools}</a>
+          <Link href="/guides" className="text-sm text-muted transition hover:text-ink">{t.nav.guides}</Link>
+          <a href="#about" className="text-sm text-muted transition hover:text-ink">{t.nav.about}</a>
         </nav>
+
         <div className="hidden items-center gap-3 lg:flex">
-          <Link
-            href="/get-help"
-            className="rounded-full border border-line px-4 py-2 text-sm font-semibold text-ink transition hover:border-ink/30"
+          <button
+            onClick={() => setLocale(locale === "en" ? "es" : "en")}
+            className="rounded-md border border-line px-2 py-1 text-xs font-medium text-muted transition hover:text-ink"
           >
-            Get Help
-          </Link>
+            {locale === "en" ? "ES" : "EN"}
+          </button>
+          <a
+            href="#contact"
+            className="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-black transition hover:bg-accent-strong"
+          >
+            {t.nav.requestAudit}
+          </a>
         </div>
-        <button
-          type="button"
-          onClick={() => setOpen((current) => !current)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white/75 text-ink lg:hidden"
-          aria-label="Toggle navigation"
-          aria-expanded={open}
-        >
-          <span className="space-y-1.5">
-            <span className="block h-0.5 w-5 bg-current" />
-            <span className="block h-0.5 w-5 bg-current" />
-            <span className="block h-0.5 w-5 bg-current" />
-          </span>
-        </button>
+
+        <div className="flex items-center gap-2 lg:hidden">
+          <button
+            onClick={() => setLocale(locale === "en" ? "es" : "en")}
+            className="rounded-md border border-line px-2 py-1 text-xs font-medium text-muted"
+          >
+            {locale === "en" ? "ES" : "EN"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setOpen((c) => !c)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line text-ink"
+            aria-label="Menu"
+          >
+            <span className="space-y-1.5">
+              <span className="block h-0.5 w-5 bg-current" />
+              <span className="block h-0.5 w-5 bg-current" />
+              <span className="block h-0.5 w-5 bg-current" />
+            </span>
+          </button>
+        </div>
       </div>
-      {open ? (
-        <div className="border-t border-line/80 bg-background/96 px-4 py-4 lg:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col gap-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "rounded-2xl px-4 py-3 text-sm font-medium transition",
-                  isActive(pathname, link.href) ? "bg-white text-ink" : "text-ink/70",
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href="/get-help"
+
+      {open && (
+        <div className="border-t border-line/50 bg-background/95 backdrop-blur-xl px-4 py-4 lg:hidden">
+          <div className="flex flex-col gap-2">
+            <a href="#services" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm text-muted hover:bg-card hover:text-ink">{t.nav.services}</a>
+            <a href="#tools" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm text-muted hover:bg-card hover:text-ink">{t.nav.tools}</a>
+            <Link href="/guides" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm text-muted hover:bg-card hover:text-ink">{t.nav.guides}</Link>
+            <a href="#about" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm text-muted hover:bg-card hover:text-ink">{t.nav.about}</a>
+            <a
+              href="#contact"
               onClick={() => setOpen(false)}
-              className="rounded-2xl border border-line bg-white px-4 py-3 text-center text-sm font-semibold text-ink"
+              className="mt-2 rounded-md bg-accent px-4 py-3 text-center text-sm font-semibold text-black"
             >
-              Get Help
-            </Link>
+              {t.nav.requestAudit}
+            </a>
           </div>
         </div>
-      ) : null}
+      )}
     </header>
   );
 }

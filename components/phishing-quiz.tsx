@@ -198,10 +198,10 @@ const typeLabels: Record<ScenarioType, string> = {
 };
 
 const typeColors: Record<ScenarioType, string> = {
-  email: "bg-brand/12 text-brand-strong",
+  email: "bg-accent/10 text-accent",
   sms: "bg-warning/12 text-warning",
-  website: "bg-signal text-brand-strong",
-  dm: "bg-ink/8 text-ink",
+  website: "bg-accent/10 text-accent",
+  dm: "bg-card text-ink",
 };
 
 export function PhishingQuiz() {
@@ -248,9 +248,9 @@ export function PhishingQuiz() {
   return (
     <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
       {/* Scenario card */}
-      <section className="panel rounded-[2rem] border border-line p-6 sm:p-8">
+      <section className="rounded-xl border border-line bg-card p-6 sm:p-8">
         <div className="flex items-center justify-between gap-4">
-          <p className="font-display text-xs uppercase tracking-[0.3em] text-brand">
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
             Scenario {currentIndex + 1} of {scenarios.length}
           </p>
           <span className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] ${typeColors[scenario.type]}`}>
@@ -259,15 +259,15 @@ export function PhishingQuiz() {
         </div>
 
         {/* Progress bar */}
-        <div className="mt-5 h-1.5 w-full rounded-full bg-ink/8">
+        <div className="mt-5 h-1.5 w-full rounded-full bg-line">
           <div
-            className="h-full rounded-full bg-brand transition-all duration-500"
+            className="h-full rounded-full bg-accent transition-all duration-500"
             style={{ width: `${((currentIndex + (showFeedback ? 1 : 0)) / scenarios.length) * 100}%` }}
           />
         </div>
 
         {/* Simulated message */}
-        <div className="mt-6 rounded-[1.6rem] border border-line bg-white p-5">
+        <div className="mt-6 rounded-xl border border-line bg-background p-5">
           <div className="space-y-1.5">
             <p className="text-xs uppercase tracking-[0.2em] text-muted">From</p>
             <p className="font-mono text-sm font-medium text-ink">{scenario.from}</p>
@@ -277,7 +277,7 @@ export function PhishingQuiz() {
             <p className="text-base font-semibold text-ink">{scenario.subject}</p>
           </div>
           <div className="mt-4 border-t border-line pt-4">
-            <p className="whitespace-pre-line text-sm leading-7 text-ink/84">{scenario.body}</p>
+            <p className="whitespace-pre-line text-sm leading-7 text-muted">{scenario.body}</p>
           </div>
         </div>
 
@@ -287,14 +287,14 @@ export function PhishingQuiz() {
             <button
               type="button"
               onClick={() => handleAnswer(false)}
-              className="flex-1 rounded-full border border-line bg-panel px-5 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-ink transition hover:border-ink/30 hover:bg-white"
+              className="flex-1 rounded-lg border border-line bg-card px-5 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-ink transition hover:border-accent/30"
             >
               Legitimate
             </button>
             <button
               type="button"
               onClick={() => handleAnswer(true)}
-              className="flex-1 rounded-full border border-ink bg-ink px-5 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-sand transition hover:bg-ink/85"
+              className="flex-1 rounded-lg bg-accent px-5 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-black transition hover:bg-accent-strong"
             >
               Phishing
             </button>
@@ -305,16 +305,16 @@ export function PhishingQuiz() {
         {showFeedback && (
           <div className="mt-6 space-y-4">
             <div
-              className={`rounded-[1.4rem] border px-5 py-4 ${
+              className={`rounded-xl border px-5 py-4 ${
                 wasCorrect
-                  ? "border-brand/30 bg-brand/8"
+                  ? "border-accent/30 bg-accent/10"
                   : "border-warning/30 bg-warning/8"
               }`}
             >
-              <p className={`text-sm font-semibold ${wasCorrect ? "text-brand-strong" : "text-warning"}`}>
+              <p className={`text-sm font-semibold ${wasCorrect ? "text-accent" : "text-warning"}`}>
                 {wasCorrect ? "Correct!" : "Not quite."}
                 {" "}
-                <span className="font-normal text-ink/72">
+                <span className="font-normal text-muted">
                   This was {scenario.isPhishing ? "a phishing attempt" : "a legitimate message"}.
                 </span>
               </p>
@@ -322,7 +322,7 @@ export function PhishingQuiz() {
             <button
               type="button"
               onClick={handleNext}
-              className="w-full rounded-full border border-ink bg-ink px-5 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-sand transition hover:bg-ink/85"
+              className="w-full rounded-lg bg-accent px-5 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-black transition hover:bg-accent-strong"
             >
               {currentIndex < scenarios.length - 1 ? "Next scenario" : "See results"}
             </button>
@@ -331,20 +331,20 @@ export function PhishingQuiz() {
       </section>
 
       {/* Explanation panel */}
-      <section className="dark-panel rounded-[2rem] border border-black/10 p-6 sm:p-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-signal">
+      <section className="rounded-xl border border-accent/20 bg-accent/5 p-6 sm:p-8">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
           {showFeedback ? "Analysis" : "Your score"}
         </p>
 
         {!showFeedback && (
           <>
-            <div className="mt-5 rounded-[1.6rem] border border-white/10 bg-white/6 p-5">
-              <p className="text-xs uppercase tracking-[0.24em] text-sand/54">Current score</p>
-              <p className="mt-3 font-display text-4xl text-signal">
+            <div className="mt-5 rounded-xl border border-line bg-card p-5">
+              <p className="text-xs uppercase tracking-[0.24em] text-muted">Current score</p>
+              <p className="mt-3 text-4xl font-bold text-accent">
                 {correctCount}
-                <span className="text-xl text-sand/54">/{Object.keys(answers).length || "0"}</span>
+                <span className="text-xl text-muted">/{Object.keys(answers).length || "0"}</span>
               </p>
-              <p className="mt-3 text-sm leading-7 text-sand/76">
+              <p className="mt-3 text-sm leading-7 text-muted">
                 Read the scenario carefully. Look at the sender, the domain, the tone, and any links before deciding.
               </p>
             </div>
@@ -358,21 +358,21 @@ export function PhishingQuiz() {
 
         {showFeedback && (
           <>
-            <h3 className="mt-4 font-display text-xl text-signal">
+            <h3 className="mt-4 text-xl font-bold text-accent">
               {scenario.isPhishing ? "Why this is phishing" : "Why this is legitimate"}
             </h3>
-            <p className="mt-3 text-sm leading-7 text-sand/76">{scenario.explanation}</p>
+            <p className="mt-3 text-sm leading-7 text-muted">{scenario.explanation}</p>
             <div className="mt-6 space-y-3">
-              <p className="text-xs uppercase tracking-[0.24em] text-sand/54">
+              <p className="text-xs uppercase tracking-[0.24em] text-muted">
                 {scenario.isPhishing ? "Red flags" : "Trust signals"}
               </p>
               {scenario.indicators.map((indicator) => (
                 <div
                   key={indicator}
-                  className={`rounded-[1.4rem] border px-4 py-3.5 text-sm leading-7 ${
+                  className={`rounded-xl border px-4 py-3.5 text-sm leading-7 ${
                     scenario.isPhishing
-                      ? "border-warning/20 bg-warning/8 text-sand/90"
-                      : "border-signal/20 bg-signal/8 text-sand/90"
+                      ? "border-warning/20 bg-warning/8 text-ink"
+                      : "border-accent/20 bg-accent/10 text-ink"
                   }`}
                 >
                   {indicator}
@@ -414,16 +414,16 @@ function ScoreCard({
 
   return (
     <div className="grid gap-6 xl:grid-cols-[1fr_1fr]">
-      <section className="panel rounded-[2rem] border border-line p-6 sm:p-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-brand">Final score</p>
-        <h3 className="mt-3 font-display text-2xl text-ink">Phishing Detection Results</h3>
+      <section className="rounded-xl border border-line bg-card p-6 sm:p-8">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Final score</p>
+        <h3 className="mt-3 text-2xl font-bold text-ink">Phishing Detection Results</h3>
 
-        <div className="mt-6 rounded-[1.6rem] border border-line bg-white/75 p-6">
-          <p className="text-center font-display text-6xl text-ink">
+        <div className="mt-6 rounded-xl border border-line bg-card/80 p-6">
+          <p className="text-center text-6xl font-bold text-ink">
             {correctCount}
             <span className="text-2xl text-muted">/{total}</span>
           </p>
-          <p className="mt-2 text-center text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+          <p className="mt-2 text-center text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             {percentage}% correct
           </p>
         </div>
@@ -434,9 +434,9 @@ function ScoreCard({
             {scenarios.map((s, idx) => (
               <div
                 key={s.id}
-                className={`flex h-10 w-full items-center justify-center rounded-[0.8rem] text-xs font-semibold ${
+                className={`flex h-10 w-full items-center justify-center rounded-xl text-xs font-semibold ${
                   answers[idx]
-                    ? "bg-brand/12 text-brand-strong"
+                    ? "bg-accent/10 text-accent"
                     : "bg-warning/12 text-warning"
                 }`}
               >
@@ -445,7 +445,7 @@ function ScoreCard({
             ))}
           </div>
           <p className="text-xs text-muted">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm bg-brand/20 align-middle" /> Correct
+            <span className="inline-block h-2.5 w-2.5 rounded-sm bg-accent/20 align-middle" /> Correct
             {" "}
             <span className="ml-2 inline-block h-2.5 w-2.5 rounded-sm bg-warning/20 align-middle" /> Wrong
           </p>
@@ -454,18 +454,18 @@ function ScoreCard({
         <button
           type="button"
           onClick={onRestart}
-          className="mt-8 w-full rounded-full border border-ink bg-ink px-5 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-sand transition hover:bg-ink/85"
+          className="mt-8 w-full rounded-lg bg-accent px-5 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-black transition hover:bg-accent-strong"
         >
           Take the quiz again
         </button>
       </section>
 
-      <section className="dark-panel rounded-[2rem] border border-black/10 p-6 sm:p-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-signal">Assessment</p>
-        <div className="mt-5 rounded-[1.6rem] border border-white/10 bg-white/6 p-5">
-          <p className="text-xs uppercase tracking-[0.24em] text-sand/54">Awareness level</p>
-          <p className="mt-3 font-display text-4xl text-signal">{level}</p>
-          <p className="mt-3 text-sm leading-7 text-sand/76">
+      <section className="rounded-xl border border-accent/20 bg-accent/5 p-6 sm:p-8">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Assessment</p>
+        <div className="mt-5 rounded-xl border border-line bg-card p-5">
+          <p className="text-xs uppercase tracking-[0.24em] text-muted">Awareness level</p>
+          <p className="mt-3 text-4xl font-bold text-accent">{level}</p>
+          <p className="mt-3 text-sm leading-7 text-muted">
             {percentage >= 90
               ? "You have a strong instinct for spotting phishing. Stay sharp -- attackers keep evolving their tactics."
               : percentage >= 70
@@ -478,7 +478,7 @@ function ScoreCard({
 
         {tips.length > 0 && (
           <div className="mt-6 space-y-3">
-            <p className="text-xs uppercase tracking-[0.24em] text-sand/54">Based on what you missed</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-muted">Based on what you missed</p>
             {tips.map((tip) => (
               <InfoTip key={tip} text={tip} />
             ))}
@@ -487,7 +487,7 @@ function ScoreCard({
 
         {missedScenarios.length === 0 && (
           <div className="mt-6 space-y-3">
-            <p className="text-xs uppercase tracking-[0.24em] text-sand/54">Keep in mind</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-muted">Keep in mind</p>
             <InfoTip text="Even strong awareness fades without practice. Revisit this quiz periodically to stay sharp." />
             <InfoTip text="Share this tool with friends and family -- they are often the weakest link in your security chain." />
             <InfoTip text="Consider the Account Hardening Planner and OPSEC Checklist to strengthen the rest of your setup." />
@@ -556,7 +556,7 @@ function generateTips(missedScenarios: Scenario[]): string[] {
 
 function InfoTip({ text }: { text: string }) {
   return (
-    <div className="rounded-[1.4rem] border border-white/10 bg-white/5 px-4 py-4 text-sm leading-7 text-sand/76">
+    <div className="rounded-xl border border-line bg-card px-4 py-4 text-sm leading-7 text-muted">
       {text}
     </div>
   );

@@ -364,11 +364,11 @@ export function PasswordAnalyzer() {
   return (
     <div className="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
       {/* ---- Left panel: input + findings ---- */}
-      <section className="panel rounded-[2rem] border border-line p-6 sm:p-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-brand">
+      <section className="rounded-xl border border-line bg-card p-6 sm:p-8">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
           Analyzer
         </p>
-        <h3 className="mt-3 font-display text-2xl text-ink">
+        <h3 className="mt-3 text-2xl font-bold text-ink">
           Password Strength Analyzer
         </h3>
         <p className="mt-3 text-sm leading-7 text-muted">
@@ -385,7 +385,7 @@ export function PasswordAnalyzer() {
             placeholder="Enter a password to analyze..."
             autoComplete="off"
             spellCheck={false}
-            className="w-full rounded-[1.4rem] border border-line bg-white/75 px-5 py-4 pr-14 font-mono text-sm text-ink placeholder:text-muted/50 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand/30"
+            className="w-full rounded-xl border border-line bg-background px-5 py-4 pr-14 font-mono text-sm text-ink placeholder:text-muted/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/30"
           />
           <button
             type="button"
@@ -398,9 +398,9 @@ export function PasswordAnalyzer() {
         </div>
 
         {/* Privacy notice */}
-        <div className="mt-4 flex items-start gap-2 rounded-[1rem] border border-brand/20 bg-signal/30 px-4 py-3">
-          <LockIcon className="mt-0.5 shrink-0 text-brand" />
-          <p className="text-xs leading-5 text-ink/70">
+        <div className="mt-4 flex items-start gap-2 rounded-xl border border-accent/20 bg-accent/10 px-4 py-3">
+          <LockIcon className="mt-0.5 shrink-0 text-accent" />
+          <p className="text-xs leading-5 text-muted">
             Your password never leaves your browser. All analysis runs
             client-side with pure JavaScript — no external APIs, no network
             requests, no logging.
@@ -418,10 +418,10 @@ export function PasswordAnalyzer() {
                 <div
                   key={i}
                   className={cn(
-                    "flex items-start gap-2.5 rounded-[1.2rem] border px-4 py-3 text-sm leading-6",
+                    "flex items-start gap-2.5 rounded-xl border px-4 py-3 text-sm leading-6",
                     finding.type === "penalty"
-                      ? "border-red-200 bg-red-50 text-red-800"
-                      : "border-emerald-200 bg-emerald-50 text-emerald-800",
+                      ? "border-red-500/20 bg-red-500/10 text-red-400"
+                      : "border-emerald-500/20 bg-emerald-500/10 text-emerald-400",
                   )}
                 >
                   <span className="mt-0.5 shrink-0 text-xs">
@@ -436,33 +436,33 @@ export function PasswordAnalyzer() {
       </section>
 
       {/* ---- Right panel: results ---- */}
-      <section className="dark-panel rounded-[2rem] border border-black/10 p-6 sm:p-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-signal">
+      <section className="rounded-xl border border-accent/20 bg-accent/5 p-6 sm:p-8">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
           Result
         </p>
 
         {/* Strength label + bar */}
-        <div className="mt-5 rounded-[1.6rem] border border-white/10 bg-white/6 p-5">
-          <p className="text-xs uppercase tracking-[0.24em] text-sand/54">
+        <div className="mt-5 rounded-xl border border-line bg-card p-5">
+          <p className="text-xs uppercase tracking-[0.24em] text-muted">
             Strength
           </p>
           <p
             className={cn(
-              "mt-3 font-display text-4xl",
+              "mt-3 text-4xl font-bold",
               password.length > 0
                 ? strengthTextColor(analysis.level)
-                : "text-sand/30",
+                : "text-muted/30",
             )}
           >
             {password.length > 0 ? analysis.level : "Waiting..."}
           </p>
 
           {/* Visual bar */}
-          <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-white/10">
+          <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-line">
             <div
               className={cn(
                 "h-full rounded-full transition-all duration-300",
-                password.length > 0 ? strengthColor(analysis.level) : "bg-white/5",
+                password.length > 0 ? strengthColor(analysis.level) : "bg-line",
               )}
               style={{ width: `${password.length > 0 ? strengthPercent(analysis.score) : 0}%` }}
             />
@@ -471,24 +471,24 @@ export function PasswordAnalyzer() {
 
         {/* Metrics row */}
         <div className="mt-4 grid grid-cols-2 gap-3">
-          <div className="rounded-[1.4rem] border border-white/10 bg-white/5 p-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-sand/54">
+          <div className="rounded-xl border border-line bg-card p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-muted">
               Entropy
             </p>
-            <p className="mt-2 font-mono text-lg text-sand">
+            <p className="mt-2 font-mono text-lg text-ink">
               {password.length > 0
                 ? `${Math.round(analysis.entropy)} bits`
                 : "-"}
             </p>
           </div>
-          <div className="rounded-[1.4rem] border border-white/10 bg-white/5 p-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-sand/54">
+          <div className="rounded-xl border border-line bg-card p-4">
+            <p className="text-xs uppercase tracking-[0.2em] text-muted">
               Est. crack time
             </p>
-            <p className="mt-2 font-mono text-lg text-sand">
+            <p className="mt-2 font-mono text-lg text-ink">
               {analysis.crackTime}
             </p>
-            <p className="mt-1 text-[10px] leading-4 text-sand/40">
+            <p className="mt-1 text-[10px] leading-4 text-muted/60">
               Offline attack, 10B guesses/s
             </p>
           </div>
@@ -496,13 +496,13 @@ export function PasswordAnalyzer() {
 
         {/* Tips */}
         <div className="mt-6 space-y-3">
-          <p className="text-xs uppercase tracking-[0.2em] text-sand/54">
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">
             Tips to improve
           </p>
           {analysis.tips.map((tip, i) => (
             <div
               key={i}
-              className="rounded-[1.4rem] border border-white/10 bg-white/5 px-4 py-4 text-sm leading-7 text-sand/76"
+              className="rounded-xl border border-line bg-card px-4 py-4 text-sm leading-7 text-muted"
             >
               {tip}
             </div>
@@ -510,7 +510,7 @@ export function PasswordAnalyzer() {
         </div>
 
         {/* Reminder */}
-        <div className="mt-6 rounded-[1.6rem] border border-signal/30 bg-signal/10 p-5 text-sm leading-7 text-sand">
+        <div className="mt-6 rounded-xl border border-accent/30 bg-accent/10 p-5 text-sm leading-7 text-ink">
           Use a password manager to generate and store unique passwords for
           every account. No human can reliably remember dozens of strong,
           unique passwords.

@@ -5,7 +5,7 @@ import { analyticsEvents } from "@/lib/analytics";
 
 export function GuideCard({ guide }: { guide: Guide }) {
   return (
-    <article className="rounded-[1.5rem] border border-line bg-white p-5">
+    <article className="rounded-xl border border-line bg-card p-5">
       <p className="text-xs uppercase tracking-[0.18em] text-muted">
         {guide.category} · {guide.readTime}
       </p>
@@ -15,7 +15,7 @@ export function GuideCard({ guide }: { guide: Guide }) {
         href={`/guides/${guide.slug}`}
         eventName={analyticsEvents.guideOpen}
         eventProps={{ guide: guide.slug }}
-        className="mt-5 inline-flex text-sm font-semibold text-ink underline decoration-line underline-offset-4 transition hover:text-brand-strong"
+        className="mt-5 inline-flex text-sm font-semibold text-accent underline decoration-accent/30 underline-offset-4 transition hover:text-accent-strong"
       >
         Read guide
       </TrackedLink>

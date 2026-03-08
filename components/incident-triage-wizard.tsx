@@ -32,9 +32,9 @@ export function IncidentTriageWizard() {
 
   return (
     <div className="grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
-      <section className="panel rounded-[2rem] border border-line p-6 sm:p-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-brand">Triage</p>
-        <h3 className="mt-3 font-display text-2xl text-ink">Incident Triage Wizard</h3>
+      <section className="rounded-xl border border-line bg-card p-6 sm:p-8">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Triage</p>
+        <h3 className="mt-3 text-2xl font-bold text-ink">Incident Triage Wizard</h3>
         <p className="mt-3 text-sm leading-7 text-muted">
           Use this to slow the situation down. Pick what matches your case and focus on order, not panic.
         </p>
@@ -52,12 +52,12 @@ export function IncidentTriageWizard() {
                       : [...current, prompt.id],
                   )
                 }
-                className={`w-full rounded-[1.6rem] border p-5 text-left transition ${
-                  active ? "border-ink bg-ink text-sand" : "border-line bg-white/80 text-ink"
+                className={`w-full rounded-xl border p-5 text-left transition ${
+                  active ? "border-accent/30 bg-accent/10 text-ink" : "border-line bg-card/80 text-ink"
                 }`}
               >
                 <p className="text-base font-semibold">{prompt.label}</p>
-                <p className={`mt-2 text-sm leading-7 ${active ? "text-sand/74" : "text-muted"}`}>
+                <p className={`mt-2 text-sm leading-7 ${active ? "text-muted" : "text-muted"}`}>
                   {prompt.help}
                 </p>
               </button>
@@ -65,8 +65,8 @@ export function IncidentTriageWizard() {
           })}
         </div>
       </section>
-      <section className="dark-panel rounded-[2rem] border border-black/10 p-6 sm:p-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-signal">First response</p>
+      <section className="rounded-xl border border-accent/20 bg-accent/5 p-6 sm:p-8">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">First response</p>
         <div className="mt-6 space-y-4">
           <Tip text="Protect your primary email and recovery path first. That is usually the critical account behind everything else." />
           <Tip text="Check recent sessions, forwarding rules, recovery settings, and unfamiliar devices before changing everything at random." />
@@ -84,7 +84,7 @@ export function IncidentTriageWizard() {
 
 function Tip({ text }: { text: string }) {
   return (
-    <div className="rounded-[1.4rem] border border-white/10 bg-white/5 px-4 py-4 text-sm leading-7 text-sand/76">
+    <div className="rounded-xl border border-line bg-card px-4 py-4 text-sm leading-7 text-muted">
       {text}
     </div>
   );
@@ -92,7 +92,7 @@ function Tip({ text }: { text: string }) {
 
 function UrgentCallout() {
   return (
-    <div className="rounded-[1.5rem] border border-signal/40 bg-signal/12 px-4 py-4 text-sm leading-7 text-sand">
+    <div className="rounded-xl border border-accent/30 bg-accent/10 px-4 py-4 text-sm leading-7 text-ink">
       This looks closer to an urgent case. Do the first-response steps, then use the Incident Help intake if you want private support.
     </div>
   );

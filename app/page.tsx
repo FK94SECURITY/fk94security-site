@@ -1,127 +1,157 @@
-import { toolAssets } from "@/content/resources";
-import { services } from "@/content/site";
-import { ResourceCard } from "@/components/resource-card";
-import { SectionHeading } from "@/components/section-heading";
+"use client";
+
 import Link from "next/link";
+import { useLocale } from "@/lib/locale-context";
+import { ContactForm } from "@/components/contact-form";
+
+const toolHrefs = [
+  "/free-resources/opsec-checklist",
+  "/free-resources/password-analyzer",
+  "/free-resources/phishing-quiz",
+  "/free-resources/device-hardening",
+  "/free-resources/exposure-self-check",
+  "/free-resources/incident-triage",
+];
+
+const serviceIcons = [
+  <svg key="s1" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>,
+  <svg key="s2" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>,
+  <svg key="s3" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>,
+  <svg key="s4" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>,
+  <svg key="s5" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>,
+  <svg key="s6" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>,
+];
 
 export default function Home() {
+  const { t } = useLocale();
+
   return (
     <>
       {/* Hero */}
-      <section className="pb-20 pt-14 sm:pb-24 sm:pt-20">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <p className="font-display text-sm uppercase tracking-[0.34em] text-brand">FK94 Security</p>
-          <h1 className="mt-5 max-w-4xl font-display text-5xl leading-[0.96] text-ink sm:text-6xl lg:text-7xl">
-            Privacy and security for real people.
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">
-            Free tools, practical guides, and honest advice to protect your accounts, reduce your
-            exposure, and fix weak spots. If you need personal help, we do 1:1 consulting.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/free-resources"
-              className="rounded-full bg-ink px-5 py-3 text-center text-sm font-semibold text-sand transition hover:bg-brand-strong"
-            >
-              Explore Free Tools
-            </Link>
-            <Link
-              href="/get-help"
-              className="rounded-full border border-line px-5 py-3 text-center text-sm font-semibold text-ink transition hover:border-ink/30"
-            >
-              Get Help
-            </Link>
+      <section id="hero" className="relative overflow-hidden pt-4 pb-20 sm:pt-12 sm:pb-28">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-accent/5 blur-3xl" />
+          <div className="absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-accent/3 blur-3xl" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-widest text-accent">{t.hero.kicker}</p>
+            <h1 className="mt-4 text-4xl font-extrabold leading-tight text-ink sm:text-5xl lg:text-6xl" style={{ textWrap: "balance" }}>
+              {t.hero.title}
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">{t.hero.subtitle}</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="#contact"
+                className="rounded-lg bg-accent px-6 py-3.5 text-center text-sm font-semibold text-black transition hover:bg-accent-strong"
+              >
+                {t.hero.cta}
+              </a>
+              <a
+                href="#tools"
+                className="rounded-lg border border-line px-6 py-3.5 text-center text-sm font-semibold text-ink transition hover:border-accent/30 hover:bg-card"
+              >
+                {t.hero.ctaSecondary}
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Why it matters */}
-      <section className="pb-18 sm:pb-20">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Why it matters"
-            title="You do not need to be famous to have weak defaults."
-            body="Most people do not need paranoia. They need cleaner recovery, safer accounts, and fewer avoidable mistakes."
-          />
-          <div className="mt-10 grid gap-3 sm:grid-cols-2">
-            {[
-              "The same email or phone number is tied to everything.",
-              "Recovery settings are usually weaker than passwords.",
-              "Old accounts and public handles create unnecessary exposure.",
-              "Incidents get worse when there is no plan.",
-            ].map((item) => (
-              <div key={item} className="rounded-[1.4rem] border border-line bg-white px-5 py-4 text-sm leading-7 text-muted">
-                {item}
+      {/* Stats */}
+      <section className="border-y border-line/50 bg-surface/50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 divide-x divide-line/50 lg:grid-cols-4">
+            {t.stats.items.map((stat) => (
+              <div key={stat.label} className="px-4 py-8 text-center sm:px-6">
+                <p className="text-3xl font-bold text-accent">{stat.value}</p>
+                <p className="mt-1 text-sm text-muted">{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Free tools */}
-      <section className="section-space">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Free tools"
-            title="Everything here is free."
-            body="Use the tools, follow the guides, harden your accounts. No signup, no paywall, no tracking."
-          />
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
-            {toolAssets.map((resource) => (
-              <ResourceCard key={resource.slug} resource={resource} />
+      {/* Services */}
+      <section id="services" className="section-space">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent">{t.services.kicker}</p>
+          <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">{t.services.title}</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-muted">{t.services.subtitle}</p>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {t.services.items.map((service, i) => (
+              <div
+                key={service.name}
+                className="card-hover rounded-xl border border-line bg-card p-6"
+              >
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                  {serviceIcons[i]}
+                </div>
+                <h3 className="text-lg font-semibold text-ink">{service.name}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted">{service.description}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 1:1 Consulting */}
-      <section className="section-space">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-[1.8rem] border border-line bg-white p-6 sm:p-8">
-            <p className="font-display text-sm uppercase tracking-[0.3em] text-brand">1:1 Consulting</p>
-            <h2 className="mt-4 font-display text-4xl leading-tight text-ink sm:text-5xl">
-              When free resources are not enough.
-            </h2>
-            <p className="mt-4 text-base leading-8 text-muted">
-              Sometimes your situation is too personal, too urgent, or too messy for a checklist. That
-              is what the consulting is for. We figure out what is wrong, fix what we can, and give you
-              a clear path forward.
-            </p>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {services.map((service) => (
-                <div key={service.slug} className="rounded-[1.4rem] border border-line px-5 py-4">
-                  <p className="text-sm font-semibold text-ink">{service.name}</p>
-                  <p className="mt-1 text-sm leading-7 text-muted">{service.summary}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8">
+      {/* Free Tools */}
+      <section id="tools" className="section-space border-t border-line/50 bg-surface/30">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent">{t.tools.kicker}</p>
+          <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">{t.tools.title}</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-muted">{t.tools.subtitle}</p>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {t.tools.items.map((tool, i) => (
               <Link
-                href="/get-help"
-                className="rounded-full bg-ink px-5 py-3 text-sm font-semibold text-sand transition hover:bg-brand-strong"
+                key={tool.name}
+                href={toolHrefs[i]}
+                className="card-hover group rounded-xl border border-line bg-card p-6"
               >
-                Get Help
+                <h3 className="text-lg font-semibold text-ink">{tool.name}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted">{tool.description}</p>
+                <p className="mt-4 text-sm font-semibold text-accent transition group-hover:text-accent-strong">
+                  {tool.cta} &rarr;
+                </p>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="section-space">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-2">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent">{t.about.kicker}</p>
+              <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">{t.about.title}</h2>
+              <p className="mt-6 text-base leading-7 text-muted">{t.about.description}</p>
+              <p className="mt-4 text-base leading-7 text-muted">{t.about.method}</p>
+            </div>
+            <div className="rounded-xl border border-line bg-card p-6">
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent">{t.about.casesTitle}</p>
+              <div className="mt-6 space-y-3">
+                {t.about.cases.map((c) => (
+                  <div key={c} className="flex gap-3 text-sm text-muted">
+                    <svg className="mt-0.5 h-4 w-4 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <span>{c}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Guides teaser */}
-      <section className="pb-20 pt-4 sm:pb-24">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Guides"
-            title="Learn at your own pace."
-            body="In-depth guides on privacy, account hardening, phishing, crypto security, and more. All free."
-          />
-          <div className="mt-8">
-            <Link
-              href="/guides"
-              className="rounded-full border border-line px-5 py-3 text-sm font-semibold text-ink transition hover:border-ink/30"
-            >
-              Browse Guides
-            </Link>
+      {/* Contact */}
+      <section id="contact" className="section-space border-t border-line/50 bg-surface/30">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent">{t.audit.kicker}</p>
+          <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">{t.audit.title}</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-muted">{t.audit.subtitle}</p>
+          <div className="mt-10">
+            <ContactForm />
           </div>
         </div>
       </section>

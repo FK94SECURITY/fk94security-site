@@ -9,9 +9,9 @@ export default function PrivacyPage() {
   return (
     <section className="pb-20 pt-10 sm:pb-24 sm:pt-14">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <article className="panel rounded-[2.6rem] border border-line px-6 py-10 sm:px-10">
-          <p className="font-display text-sm uppercase tracking-[0.34em] text-brand">Privacy Policy</p>
-          <h1 className="mt-4 font-display text-5xl leading-[0.96] text-ink sm:text-6xl">Privacy-first by design.</h1>
+        <article className="rounded-xl border border-line bg-card px-6 py-10 sm:px-10">
+          <p className="text-sm font-bold uppercase tracking-[0.34em] text-accent">Privacy Policy</p>
+          <h1 className="mt-4 text-5xl font-bold leading-[0.96] text-ink sm:text-6xl">Privacy-first by design.</h1>
           <div className="mt-8 space-y-6 text-base leading-8 text-muted">
             <p>
               FK94 tries to collect as little data as possible while still running the site,

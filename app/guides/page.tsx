@@ -15,9 +15,9 @@ export default function GuidesPage() {
     <>
       <section className="pb-16 pt-10 sm:pb-20 sm:pt-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="panel rounded-[2.6rem] border border-line px-6 py-10 sm:px-10">
-            <p className="font-display text-sm uppercase tracking-[0.34em] text-brand">Guides</p>
-            <h1 className="mt-4 max-w-4xl font-display text-5xl leading-[0.96] text-ink sm:text-6xl">
+          <div className="rounded-xl border border-line bg-card px-6 py-10 sm:px-10">
+            <p className="text-sm font-bold uppercase tracking-[0.34em] text-accent">Guides</p>
+            <h1 className="mt-4 max-w-4xl text-5xl font-bold leading-[0.96] text-ink sm:text-6xl">
               Practical writing for better digital privacy habits.
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-8 text-muted sm:text-lg">
@@ -28,7 +28,7 @@ export default function GuidesPage() {
               {guideCategories.map((category) => (
                 <span
                   key={category}
-                  className="rounded-full border border-line bg-white/78 px-4 py-2 text-sm font-medium text-ink"
+                  className="rounded-full border border-line bg-card/80 px-4 py-2 text-sm font-medium text-ink"
                 >
                   {category}
                 </span>
@@ -57,11 +57,11 @@ export default function GuidesPage() {
               body="FK94 guides should educate, reduce confusion, and naturally move a portion of readers toward private help when their case gets more personal."
             />
           </div>
-          <div className="panel rounded-[2rem] border border-line p-6 sm:p-8">
-            <p className="font-display text-sm uppercase tracking-[0.28em] text-brand">Next guide ideas</p>
+          <div className="rounded-xl border border-line bg-card p-6 sm:p-8">
+            <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Next guide ideas</p>
             <div className="mt-5 space-y-3">
               {futureGuideIdeas.map((idea) => (
-                <div key={idea} className="rounded-[1.4rem] border border-line bg-white/78 px-4 py-4 text-sm leading-7 text-muted">
+                <div key={idea} className="rounded-xl border border-line bg-card/80 px-4 py-4 text-sm leading-7 text-muted">
                   {idea}
                 </div>
               ))}

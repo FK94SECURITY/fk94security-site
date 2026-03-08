@@ -41,15 +41,15 @@ export function ExposureSelfCheck() {
 
   return (
     <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-      <section className="panel rounded-[2rem] border border-line p-6 sm:p-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-brand">Self-check</p>
-        <h3 className="mt-3 font-display text-2xl text-ink">Exposure Self-Check</h3>
+      <section className="rounded-xl border border-line bg-card p-6 sm:p-8">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Self-check</p>
+        <h3 className="mt-3 text-2xl font-bold text-ink">Exposure Self-Check</h3>
         <p className="mt-3 text-sm leading-7 text-muted">
           This is not a scan. It is a quick way to notice obvious dependencies, overlap, and cleanup priorities.
         </p>
         <div className="mt-8 space-y-4">
           {prompts.map((prompt) => (
-            <div key={prompt.id} className="rounded-[1.6rem] border border-line bg-white/75 p-5">
+            <div key={prompt.id} className="rounded-xl border border-line bg-card/80 p-5">
               <p className="text-sm font-medium leading-7 text-ink">{prompt.question}</p>
               <div className="mt-4 flex gap-3">
                 {(["yes", "no"] as const).map((value) => (
@@ -59,8 +59,8 @@ export function ExposureSelfCheck() {
                     onClick={() => setAnswers((current) => ({ ...current, [prompt.id]: value }))}
                     className={`rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] transition ${
                       answers[prompt.id] === value
-                        ? "bg-ink text-sand"
-                        : "border border-line bg-panel text-ink"
+                        ? "bg-accent text-black"
+                        : "border border-line bg-card text-ink"
                     }`}
                   >
                     {value}
@@ -72,12 +72,12 @@ export function ExposureSelfCheck() {
         </div>
       </section>
 
-      <section className="dark-panel rounded-[2rem] border border-black/10 p-6 sm:p-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-signal">Result</p>
-        <div className="mt-5 rounded-[1.6rem] border border-white/10 bg-white/6 p-5">
-          <p className="text-xs uppercase tracking-[0.24em] text-sand/54">Current baseline</p>
-          <p className="mt-3 font-display text-4xl text-signal">{level}</p>
-          <p className="mt-3 text-sm leading-7 text-sand/76">
+      <section className="rounded-xl border border-accent/20 bg-accent/5 p-6 sm:p-8">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Result</p>
+        <div className="mt-5 rounded-xl border border-line bg-card p-5">
+          <p className="text-xs uppercase tracking-[0.24em] text-muted">Current baseline</p>
+          <p className="mt-3 text-4xl font-bold text-accent">{level}</p>
+          <p className="mt-3 text-sm leading-7 text-muted">
             {riskCount} of {prompts.length} answers point to avoidable overlap or weak recovery habits.
           </p>
         </div>
@@ -106,7 +106,7 @@ export function ExposureSelfCheck() {
 
 function Tip({ text }: { text: string }) {
   return (
-    <div className="rounded-[1.4rem] border border-white/10 bg-white/5 px-4 py-4 text-sm leading-7 text-sand/76">
+    <div className="rounded-xl border border-line bg-card px-4 py-4 text-sm leading-7 text-muted">
       {text}
     </div>
   );

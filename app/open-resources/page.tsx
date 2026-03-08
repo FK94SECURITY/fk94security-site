@@ -14,9 +14,9 @@ export default function OpenResourcesPage() {
     <>
       <section className="pb-16 pt-10 sm:pb-20 sm:pt-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="panel rounded-[2.6rem] border border-line px-6 py-10 sm:px-10">
-            <p className="font-display text-sm uppercase tracking-[0.34em] text-brand">GitHub / Open Resources</p>
-            <h1 className="mt-4 max-w-4xl font-display text-5xl leading-[0.96] text-ink sm:text-6xl">
+          <div className="rounded-xl border border-line bg-card px-6 py-10 sm:px-10">
+            <p className="text-sm font-bold uppercase tracking-[0.34em] text-accent">GitHub / Open Resources</p>
+            <h1 className="mt-4 max-w-4xl text-5xl font-bold leading-[0.96] text-ink sm:text-6xl">
               Open materials that support the FK94 ecosystem.
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-8 text-muted sm:text-lg">
@@ -36,16 +36,16 @@ export default function OpenResourcesPage() {
           />
           <div className="mt-12 grid gap-5 xl:grid-cols-3">
             {openRepos.map((repo) => (
-              <article key={repo.slug} className="rounded-[1.9rem] border border-line bg-white/80 p-6 shadow-[0_18px_45px_rgba(19,24,34,0.08)]">
+              <article key={repo.slug} className="rounded-xl border border-line bg-card p-6">
                 <p className="text-xs uppercase tracking-[0.22em] text-muted">{repo.license}</p>
                 <h2 className="mt-3 text-2xl font-semibold text-ink">{repo.name}</h2>
                 <p className="mt-3 text-sm leading-7 text-muted">{repo.description}</p>
-                <p className="mt-3 text-sm leading-7 text-ink/70">{repo.audience}</p>
+                <p className="mt-3 text-sm leading-7 text-muted">{repo.audience}</p>
                 <a
                   href={repo.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-6 inline-flex rounded-full bg-ink px-5 py-3 text-sm font-semibold text-sand transition hover:bg-brand-strong"
+                  className="mt-6 inline-flex rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-black transition hover:bg-accent-strong"
                 >
                   {repo.cta}
                 </a>
@@ -69,12 +69,12 @@ export default function OpenResourcesPage() {
               <article
                 key={template.slug}
                 id={template.slug}
-                className="panel scroll-mt-32 rounded-[1.8rem] border border-line p-6"
+                className="scroll-mt-32 rounded-xl border border-line bg-card p-6"
               >
                 <p className="text-xs uppercase tracking-[0.22em] text-muted">{template.time}</p>
                 <h2 className="mt-3 text-2xl font-semibold text-ink">{template.title}</h2>
                 <p className="mt-3 text-sm leading-7 text-muted">{template.description}</p>
-                <p className="mt-3 text-sm leading-7 text-ink/70">{template.audience}</p>
+                <p className="mt-3 text-sm leading-7 text-muted">{template.audience}</p>
               </article>
             ))}
           </div>
