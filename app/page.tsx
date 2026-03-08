@@ -3,12 +3,19 @@
 import Link from "next/link";
 import { useLocale } from "@/lib/locale-context";
 import { ContactForm } from "@/components/contact-form";
+import { FaqSection } from "@/components/faq-section";
 
 const toolHrefs = [
+  "/free-resources/breach-checker",
+  "/free-resources/security-score",
+  "/free-resources/phone-lookup",
   "/free-resources/opsec-checklist",
   "/free-resources/password-analyzer",
   "/free-resources/phishing-quiz",
+  "/free-resources/threat-model",
+  "/free-resources/account-mapper",
   "/free-resources/device-hardening",
+  "/free-resources/mfa-compare",
   "/free-resources/exposure-self-check",
   "/free-resources/incident-triage",
 ];
@@ -116,6 +123,14 @@ export default function Home() {
               </Link>
             ))}
           </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/free-resources"
+              className="text-sm font-semibold text-accent transition hover:text-accent-strong"
+            >
+              {t.tools.kicker}: {t.tools.items.length}+ &rarr;
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -140,6 +155,45 @@ export default function Home() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Preview */}
+      <section className="section-space border-t border-line/50 bg-surface/30">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent">{t.blog.kicker}</p>
+          <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">{t.blog.title}</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-muted">{t.blog.subtitle}</p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {t.blog.posts.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="card-hover group rounded-xl border border-line bg-card p-6"
+              >
+                <span className="text-xs font-semibold uppercase tracking-wider text-accent/70">{post.category}</span>
+                <h3 className="mt-2 text-base font-semibold text-ink">{post.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted line-clamp-2">{post.excerpt}</p>
+                <p className="mt-3 text-xs text-muted/60">{post.date}</p>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link href="/blog" className="text-sm font-semibold text-accent transition hover:text-accent-strong">
+              {t.blog.viewAll} &rarr;
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="section-space">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent">{t.faq.kicker}</p>
+          <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">{t.faq.title}</h2>
+          <div className="mt-10">
+            <FaqSection />
           </div>
         </div>
       </section>

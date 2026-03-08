@@ -23,6 +23,7 @@ export function SiteHeader() {
           <a href="#services" className="text-sm text-muted transition hover:text-ink">{t.nav.services}</a>
           <a href="#tools" className="text-sm text-muted transition hover:text-ink">{t.nav.tools}</a>
           <Link href="/guides" className="text-sm text-muted transition hover:text-ink">{t.nav.guides}</Link>
+          <Link href="/blog" className="text-sm text-muted transition hover:text-ink">{t.nav.blog}</Link>
           <a href="#about" className="text-sm text-muted transition hover:text-ink">{t.nav.about}</a>
         </nav>
 
@@ -69,6 +70,7 @@ export function SiteHeader() {
             <a href="#services" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm text-muted hover:bg-card hover:text-ink">{t.nav.services}</a>
             <a href="#tools" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm text-muted hover:bg-card hover:text-ink">{t.nav.tools}</a>
             <Link href="/guides" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm text-muted hover:bg-card hover:text-ink">{t.nav.guides}</Link>
+            <Link href="/blog" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm text-muted hover:bg-card hover:text-ink">{t.nav.blog}</Link>
             <a href="#about" onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 text-sm text-muted hover:bg-card hover:text-ink">{t.nav.about}</a>
             <a
               href="#contact"

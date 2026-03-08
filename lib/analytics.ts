@@ -3,10 +3,13 @@ export const analyticsEvents = {
   heroReview: "hero_book_review_click",
   resourceOpen: "resource_open",
   guideOpen: "guide_open",
+  blogOpen: "blog_open",
   serviceOpen: "service_cta_click",
   intakeSubmit: "intake_submit",
   urgentHelp: "urgent_help_click",
   githubOpen: "open_resource_repo_click",
+  bookingSubmit: "booking_submit",
+  floatingWidget: "floating_widget_click",
 } as const;
 
 export type AnalyticsEventName = (typeof analyticsEvents)[keyof typeof analyticsEvents];

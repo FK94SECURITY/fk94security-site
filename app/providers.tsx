@@ -3,6 +3,7 @@
 import { LocaleProvider } from "@/lib/locale-context";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { FloatingWidget } from "@/components/floating-widget";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -10,6 +11,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <SiteHeader />
       <main className="min-h-screen pt-20">{children}</main>
       <SiteFooter />
+      <FloatingWidget />
     </LocaleProvider>
   );
 }
