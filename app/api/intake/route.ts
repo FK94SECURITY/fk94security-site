@@ -16,7 +16,6 @@ function isValidPayload(value: unknown): value is IntakePayload {
     typeof candidate.helpType === "string" &&
     typeof candidate.urgency === "string" &&
     typeof candidate.usedResources === "string" &&
-    typeof candidate.budgetRange === "string" &&
     typeof candidate.details === "string"
   );
 }
@@ -25,7 +24,7 @@ export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
 
   if (!isValidPayload(body)) {
-    return NextResponse.json({ error: "Invalid intake payload." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
   const result = scoreIntake(body);

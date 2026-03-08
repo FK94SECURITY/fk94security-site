@@ -11,14 +11,14 @@ export function SiteFooter() {
           <div className="space-y-3">
             <LogoMark />
             <p className="max-w-md text-sm leading-7 text-muted">
-              Free tools and practical guidance for everyday digital privacy. Private 1:1 help when it matters more.
+              Free security tools and guides for real people. Private 1:1 help when you need it.
             </p>
           </div>
           <Link
-            href="/book-review"
+            href="/get-help"
             className="inline-flex rounded-full border border-line px-4 py-2 text-sm font-semibold text-ink transition hover:border-ink/30"
           >
-            Book a Review
+            Get Help
           </Link>
         </div>
         <div className="flex flex-wrap gap-x-8 gap-y-3 border-t border-line/80 pt-5 text-sm text-muted">
@@ -29,9 +29,9 @@ export function SiteFooter() {
           ))}
         </div>
         <div className="text-sm text-muted">
-          © 2026 FK94.
+          &copy; {new Date().getFullYear()} FK94 Security.
         </div>
       </div>
-   </footer>
+    </footer>
   );
 }

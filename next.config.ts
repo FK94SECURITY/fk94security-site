@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/dashboard",
-        destination: "/services",
+        destination: "/free-resources",
         permanent: true,
       },
       {
@@ -28,7 +28,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/contact",
-        destination: "/book-review",
+        destination: "/get-help",
+        permanent: true,
+      },
+      {
+        source: "/book-review",
+        destination: "/get-help",
         permanent: true,
       },
       {

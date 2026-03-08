@@ -38,10 +38,10 @@ export function SiteHeader() {
         </nav>
         <div className="hidden items-center gap-3 lg:flex">
           <Link
-            href="/book-review"
+            href="/get-help"
             className="rounded-full border border-line px-4 py-2 text-sm font-semibold text-ink transition hover:border-ink/30"
           >
-            Book a Review
+            Get Help
           </Link>
         </div>
         <button
@@ -75,11 +75,11 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              href="/book-review"
+              href="/get-help"
               onClick={() => setOpen(false)}
               className="rounded-2xl border border-line bg-white px-4 py-3 text-center text-sm font-semibold text-ink"
             >
-              Book a Review
+              Get Help
             </Link>
           </div>
         </div>

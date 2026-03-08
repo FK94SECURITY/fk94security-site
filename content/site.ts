@@ -1,9 +1,8 @@
 export const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/free-resources", label: "Free Resources" },
-  { href: "/services", label: "Services" },
+  { href: "/free-resources", label: "Resources" },
   { href: "/guides", label: "Guides" },
-  { href: "/book-review", label: "Book a Review" },
+  { href: "/about", label: "About" },
 ];
 
 export const homeProblems = [
@@ -41,80 +40,55 @@ export type Service = {
   slug: string;
   name: string;
   summary: string;
-  audience: string;
-  cta: string;
-  href: string;
-  scopeLabel: string;
-  pricingNote: string;
   points: string[];
 };
 
 export const services: Service[] = [
   {
-    slug: "personal-privacy-review",
-    name: "Personal Privacy Review",
+    slug: "privacy-review",
+    name: "Privacy Review",
     summary:
-      "A clear, practical session for people who want to understand where their setup is weak and what to fix first.",
-    audience: "For normal users who want a focused review without jargon.",
-    cta: "Book this review",
-    href: "/book-review?focus=general-privacy-cleanup",
-    scopeLabel: "Focused session, tailored to your setup",
-    pricingNote: "Starting from a single private review",
+      "Understand where your setup is weak and what to fix first. Accounts, recovery, exposure, quick wins.",
     points: [
       "Review of critical accounts and recovery paths",
       "MFA and account structure review",
-      "Basic exposure and hygiene review",
-      "Quick wins and priorities",
+      "Exposure and hygiene check",
+      "Prioritized action plan",
     ],
   },
   {
-    slug: "hardening-sprint",
-    name: "Hardening Sprint",
+    slug: "hardening",
+    name: "Hardening",
     summary:
-      "Hands-on help to actually implement the changes, clean up old settings, and build a safer baseline.",
-    audience: "For people who do not want to figure everything out alone.",
-    cta: "Start a sprint",
-    href: "/book-review?focus=account-security",
-    scopeLabel: "Scoped around implementation work",
-    pricingNote: "Tailored to implementation scope",
+      "Hands-on help to actually implement changes, clean up old settings, and build a safer baseline.",
     points: [
       "Account structure and cleanup",
       "Recovery and MFA setup",
-      "Browser and device basics",
+      "Browser and device hardening",
       "Identity separation where needed",
     ],
   },
   {
-    slug: "incident-help",
-    name: "Incident Help",
+    slug: "incident-response",
+    name: "Incident Response",
     summary:
-      "Support for phishing scares, suspicious activity, access loss, or recent exposure that needs calm triage.",
-    audience: "For people dealing with a current or recent problem.",
-    cta: "Request urgent help",
-    href: "/incident-help",
-    scopeLabel: "Response depends on urgency and scope",
-    pricingNote: "Urgent scopes reviewed first",
+      "Phishing scares, suspicious activity, access loss, or recent exposure that needs calm, structured triage.",
     points: [
-      "Immediate next steps and triage",
-      "Damage containment priorities",
-      "Account recovery and cleanup guidance",
-      "Clear escalation path if needed",
+      "Immediate triage and next steps",
+      "Damage containment",
+      "Account recovery guidance",
+      "Escalation path if needed",
     ],
   },
   {
-    slug: "private-opsec-advisory",
-    name: "Private OPSEC Advisory",
+    slug: "opsec-advisory",
+    name: "OPSEC Advisory",
     summary:
-      "Deeper support for more exposed people, more sensitive situations, or cases that do not fit a basic review.",
-    audience: "For higher-exposure, more complex, or more private cases.",
-    cta: "Apply privately",
-    href: "/book-review?focus=public-exposure-concerns",
-    scopeLabel: "Private scope review before engagement",
-    pricingNote: "Private scope review before pricing",
+      "For more exposed people, sensitive situations, or cases that need deeper, private support.",
     points: [
-      "More sensitive setup review",
+      "Sensitive setup review",
       "Exposure and identity mapping",
-      "Safer communications and operating habits",
+      "Safer communication habits",
       "Tailored advice for unusual situations",
     ],
   },
@@ -165,39 +139,27 @@ export const urgencyOptions = [
   { value: "high", label: "High" },
 ];
 
-export const budgetOptions = [
-  { value: "not-sure", label: "Not sure yet" },
-  { value: "under-200", label: "Under $200" },
-  { value: "200-500", label: "$200 - $500" },
-  { value: "500-1200", label: "$500 - $1,200" },
-  { value: "1200-plus", label: "$1,200+" },
-];
-
 export const footerGroups = [
   {
-    title: "Explore",
+    title: "Learn",
     links: [
       { href: "/free-resources", label: "Free Resources" },
       { href: "/guides", label: "Guides" },
-      { href: "/open-resources", label: "Open Resources" },
+      { href: "/open-resources", label: "Open Source" },
+    ],
+  },
+  {
+    title: "Help",
+    links: [
+      { href: "/get-help", label: "Get Help" },
       { href: "/incident-help", label: "Incident Help" },
+      { href: "/about", label: "About" },
     ],
   },
   {
-    title: "Services",
+    title: "Legal",
     links: [
-      { href: "/services", label: "Personal Privacy Review" },
-      { href: "/services#hardening-sprint", label: "Hardening Sprint" },
-      { href: "/services#incident-help", label: "Incident Help" },
-      { href: "/services#private-opsec-advisory", label: "Private Advisory" },
-    ],
-  },
-  {
-    title: "FK94",
-    links: [
-      { href: "/about", label: "About / Method" },
-      { href: "/book-review", label: "Book a Review" },
-      { href: "/privacy", label: "Privacy Policy" },
+      { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Terms" },
     ],
   },

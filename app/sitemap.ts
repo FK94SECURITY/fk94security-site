@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/free-resources/exposure-self-check",
     "/services",
     "/about",
-    "/book-review",
+    "/get-help",
     "/incident-help",
     "/guides",
     "/open-resources",

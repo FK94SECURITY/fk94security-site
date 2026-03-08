@@ -7,7 +7,6 @@ export type IntakePayload = {
   helpType: string;
   urgency: "low" | "medium" | "high";
   usedResources: string;
-  budgetRange: string;
   details: string;
 };
 
@@ -30,12 +29,12 @@ const resourceByHelpType: Record<string, string[]> = {
 };
 
 const serviceByHelpType: Record<string, string> = {
-  "general-privacy-cleanup": "Personal Privacy Review",
-  "account-security": "Hardening Sprint",
-  "crypto-related-privacy": "Private OPSEC Advisory",
-  "incident-suspicious-activity": "Incident Help",
-  "public-exposure-concerns": "Private OPSEC Advisory",
-  other: "Personal Privacy Review",
+  "general-privacy-cleanup": "Privacy Review",
+  "account-security": "Hardening",
+  "crypto-related-privacy": "OPSEC Advisory",
+  "incident-suspicious-activity": "Incident Response",
+  "public-exposure-concerns": "OPSEC Advisory",
+  other: "Privacy Review",
 };
 
 export function getRecommendedResourceSlugs(helpType: string) {
@@ -43,7 +42,7 @@ export function getRecommendedResourceSlugs(helpType: string) {
 }
 
 export function getSuggestedService(helpType: string) {
-  return serviceByHelpType[helpType] ?? "Personal Privacy Review";
+  return serviceByHelpType[helpType] ?? "Privacy Review";
 }
 
 export function scoreIntake(payload: IntakePayload): IntakeResult {
@@ -63,33 +62,27 @@ export function scoreIntake(payload: IntakePayload): IntakeResult {
     points += 1;
   }
 
-  if (payload.budgetRange === "500-1200" || payload.budgetRange === "1200-plus") {
-    points += 2;
-  } else if (payload.budgetRange === "200-500") {
-    points += 1;
-  }
-
   if (payload.details.trim().length > 180) {
     points += 1;
   }
 
-  const fit = points >= 7 ? "high" : points >= 4 ? "medium" : "low";
+  const fit = points >= 6 ? "high" : points >= 3 ? "medium" : "low";
   const suggestedService = getSuggestedService(payload.helpType);
   const recommendedResourceSlugs = getRecommendedResourceSlugs(payload.helpType);
 
   const responseWindow =
     payload.urgency === "high"
-      ? "We aim to review urgent requests within 1 business day."
+      ? "We will review your request within 24 hours."
       : payload.urgency === "medium"
-        ? "We aim to respond within 2 business days."
-        : "We aim to respond within 3 business days.";
+        ? "We will get back to you within 2 days."
+        : "We will respond within 3 days.";
 
   const summary =
     fit === "high"
-      ? "Strong consulting fit. A private review or scoped response is likely the right next step."
+      ? "Your situation needs personal attention. We will reach out soon."
       : fit === "medium"
-        ? "Good fit. Start with a focused review and use the recommended resources while you wait."
-        : "Likely a basics-first case. Start with the free resources and we can scope personal help if needed.";
+        ? "Looks like a good fit for a 1:1 session. Check the recommended resources while you wait."
+        : "Start with the free resources below. If you still need help after that, we are here.";
 
   return {
     fit,
