@@ -72,11 +72,12 @@ export const translations = {
         { name: "Email Analyzer", description: "Paste email headers from a suspicious message. We detect spoofing, trace the sender, and verify authentication.", cta: "Analyze Headers" },
         { name: "Username OSINT", description: "Search a username across 30+ platforms automatically. See your complete digital footprint.", cta: "Search Username" },
         { name: "Website Scanner", description: "Scan any website for security headers, HTTPS, and vulnerabilities. Get a grade from A+ to F.", cta: "Scan Website" },
+        { name: "OS Hardening Scripts", description: "Generate ready-to-run hardening scripts for macOS and Windows. Choose your profile, pick steps, download the script.", cta: "Generate Script" },
       ],
     },
     stats: {
       items: [
-        { value: "18", label: "Free Tools" },
+        { value: "19", label: "Free Tools" },
         { value: "10+", label: "Expert Guides" },
         { value: "100%", label: "Client-Side" },
         { value: "24h", label: "Response Time" },
@@ -241,11 +242,12 @@ export const translations = {
         { name: "Analizador de Email", description: "Pegá los headers de un email sospechoso. Detectamos spoofing, trazamos el remitente y verificamos autenticación.", cta: "Analizar Headers" },
         { name: "OSINT de Username", description: "Buscá un username en 30+ plataformas automáticamente. Mirá tu huella digital completa.", cta: "Buscar Username" },
         { name: "Scanner de Sitio Web", description: "Escaneá cualquier sitio web buscando headers de seguridad, HTTPS y vulnerabilidades. Nota de A+ a F.", cta: "Escanear Sitio" },
+        { name: "Scripts de Hardening", description: "Generá scripts de hardening listos para ejecutar en macOS y Windows. Elegí tu perfil, seleccioná pasos, descargá el script.", cta: "Generar Script" },
       ],
     },
     stats: {
       items: [
-        { value: "18", label: "Herramientas Gratis" },
+        { value: "19", label: "Herramientas Gratis" },
         { value: "10+", label: "Guías de Expertos" },
         { value: "100%", label: "Client-Side" },
         { value: "24h", label: "Tiempo de Respuesta" },

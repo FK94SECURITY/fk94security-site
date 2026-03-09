@@ -190,6 +190,16 @@ export const toolAssets: ResourceAsset[] = [
     cta: "Scan website",
     tags: ["intermediate", "devices"],
   },
+  {
+    slug: "os-hardening",
+    title: "OS Hardening Script Generator",
+    description: "Generate ready-to-run hardening scripts for macOS and Windows. Choose a security profile, pick your steps, download the script.",
+    audience: "For anyone who wants to lock down their OS with real commands.",
+    time: "5-10 min",
+    href: "/free-resources/os-hardening",
+    cta: "Generate script",
+    tags: ["intermediate", "devices", "hardening"],
+  },
 ];
 
 export const guideHighlights: ResourceAsset[] = [

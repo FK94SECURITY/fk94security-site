@@ -23,6 +23,7 @@ const toolHrefs = [
   "/free-resources/email-analyzer",
   "/free-resources/username-osint",
   "/free-resources/website-scanner",
+  "/free-resources/os-hardening",
 ];
 
 const serviceIcons = [
