@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
 
-import { scoreIntake, type IntakePayload, type IntakeResult } from "@/lib/intake";
+import { scoreIntake, type IntakePayload } from "@/lib/intake";
 
 function isValidPayload(value: unknown): value is IntakePayload {
   if (!value || typeof value !== "object") {
@@ -20,43 +21,6 @@ function isValidPayload(value: unknown): value is IntakePayload {
   );
 }
 
-function sendTelegramNotification(payload: IntakePayload, result: IntakeResult) {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-
-  if (!token || !chatId) return;
-
-  const text = [
-    `\u{1F514} <b>New FK94 Intake</b>`,
-    ``,
-    `<b>Name:</b> ${payload.name}`,
-    `<b>Email:</b> ${payload.email}`,
-    `<b>Help type:</b> ${payload.helpType}`,
-    `<b>Urgency:</b> ${payload.urgency}`,
-    `<b>Timezone:</b> ${payload.countryTimezone}`,
-    ``,
-    `<b>Details:</b>`,
-    payload.details,
-    ``,
-    `---`,
-    `<b>Fit:</b> ${result.fit}`,
-    `<b>Service:</b> ${result.suggestedService}`,
-    `<b>Response window:</b> ${result.responseWindow}`,
-  ].join("\n");
-
-  fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text,
-      parse_mode: "HTML",
-    }),
-  }).catch((err) => {
-    console.error("FK94 Telegram notification failed", err);
-  });
-}
-
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
 
@@ -66,30 +30,41 @@ export async function POST(request: Request) {
 
   const result = scoreIntake(body);
 
-  // n8n webhook (blocking)
-  const webhookUrl = process.env.N8N_INTAKE_WEBHOOK_URL;
-
-  if (webhookUrl) {
+  // Send email notification to info@fk94security.com
+  const apiKey = process.env.RESEND_API_KEY;
+  if (apiKey) {
     try {
-      await fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          type: "fk94_intake",
-          capturedAt: new Date().toISOString(),
-          payload: body,
-          result,
-        }),
+      const resend = new Resend(apiKey);
+      await resend.emails.send({
+        from: "FK94 Security <notifications@fk94security.com>",
+        to: "info@fk94security.com",
+        replyTo: body.email,
+        subject: `New inquiry: ${body.helpType} (${result.fit} fit)`,
+        html: `
+          <h2>New FK94 Security Inquiry</h2>
+          <table style="border-collapse:collapse;width:100%;max-width:600px;font-family:sans-serif;">
+            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;width:140px;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">${body.name}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;"><a href="mailto:${body.email}">${body.email}</a></td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Help type</td><td style="padding:8px;border-bottom:1px solid #eee;">${body.helpType}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Urgency</td><td style="padding:8px;border-bottom:1px solid #eee;">${body.urgency}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Timezone</td><td style="padding:8px;border-bottom:1px solid #eee;">${body.countryTimezone}</td></tr>
+          </table>
+          <h3 style="margin-top:20px;">Details</h3>
+          <p style="white-space:pre-wrap;background:#f9f9f9;padding:12px;border-radius:6px;font-family:sans-serif;">${body.details}</p>
+          <hr style="margin:24px 0;border:none;border-top:1px solid #eee;" />
+          <h3>Scoring</h3>
+          <table style="border-collapse:collapse;font-family:sans-serif;">
+            <tr><td style="padding:4px 12px 4px 0;font-weight:bold;">Fit</td><td>${result.fit}</td></tr>
+            <tr><td style="padding:4px 12px 4px 0;font-weight:bold;">Service</td><td>${result.suggestedService}</td></tr>
+            <tr><td style="padding:4px 12px 4px 0;font-weight:bold;">Response window</td><td>${result.responseWindow}</td></tr>
+          </table>
+          <p style="margin-top:16px;color:#888;font-size:12px;">Sent from fk94security.com intake form</p>
+        `,
       });
     } catch (error) {
-      console.error("FK94 intake webhook failed", error);
+      console.error("FK94 email notification failed", error);
     }
   }
-
-  // Telegram notification (non-blocking, fire-and-forget)
-  sendTelegramNotification(body, result);
 
   return NextResponse.json(result);
 }
