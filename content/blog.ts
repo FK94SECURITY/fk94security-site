@@ -22,7 +22,7 @@ export const blogPosts: BlogPost[] = [
     title: "How to Check If Your Data Was in the National Public Data Breach",
     excerpt:
       "Nearly 800 million records were exposed, including Social Security numbers and home addresses. Here is how to check if you were affected and what to do next.",
-    date: "2024-08-15",
+    date: "2025-08-15",
     category: "breach-alert",
     readTime: "6 min read",
     content: `
@@ -85,7 +85,7 @@ export const blogPosts: BlogPost[] = [
     title: "Why SMS 2FA Is Better Than Nothing (But Not By Much)",
     excerpt:
       "SMS-based two-factor authentication is the most common second factor, but it has real weaknesses. Here is when it is acceptable and when you need to upgrade.",
-    date: "2024-09-20",
+    date: "2025-11-20",
     category: "security-tip",
     readTime: "5 min read",
     content: `
@@ -140,7 +140,7 @@ export const blogPosts: BlogPost[] = [
     title: "Passkeys Are Here: What You Need to Know",
     excerpt:
       "Passkeys replace passwords with cryptographic keys tied to your device and biometrics. They are phishing-resistant, easier to use, and already supported by major platforms.",
-    date: "2024-10-05",
+    date: "2026-01-05",
     category: "security-tip",
     readTime: "7 min read",
     content: `
@@ -203,7 +203,7 @@ export const blogPosts: BlogPost[] = [
     title: "The LastPass Breach: Lessons for Everyone",
     excerpt:
       "The LastPass breach exposed encrypted password vaults for millions of users. Here is what happened, who is at risk, and what to do whether or not you were a user.",
-    date: "2024-07-10",
+    date: "2025-07-10",
     category: "breach-alert",
     readTime: "7 min read",
     content: `
@@ -260,7 +260,7 @@ export const blogPosts: BlogPost[] = [
     title: "5 Privacy Settings You Should Change on iPhone Right Now",
     excerpt:
       "Your iPhone ships with privacy defaults that favor convenience over protection. These five settings take five minutes to change and meaningfully reduce your exposure.",
-    date: "2024-11-01",
+    date: "2026-02-01",
     category: "security-tip",
     readTime: "5 min read",
     content: `
@@ -323,7 +323,7 @@ export const blogPosts: BlogPost[] = [
     title: "New Phishing Technique Bypasses MFA - Here's How to Stay Safe",
     excerpt:
       "Adversary-in-the-middle phishing attacks can capture session tokens in real time, bypassing even app-based MFA. Learn how they work and what actually protects you.",
-    date: "2024-12-01",
+    date: "2026-03-01",
     category: "news",
     readTime: "6 min read",
     content: `

@@ -88,9 +88,9 @@ export const translations = {
       subtitle: "Recent breach alerts, security tips, and practical advice to keep you ahead of threats.",
       viewAll: "View all posts",
       posts: [
-        { slug: "national-public-data-breach-check", category: "Breach Alert", title: "How to Check If Your Data Was in the National Public Data Breach", excerpt: "800 million records exposed including SSNs and addresses. Here is how to check and protect yourself.", date: "2024-08-15" },
-        { slug: "passkeys-what-you-need-to-know", category: "Security Tip", title: "Passkeys Are Here: What You Need to Know", excerpt: "The future of authentication is passwordless. Which services support passkeys and how to set them up.", date: "2024-10-05" },
-        { slug: "mfa-bypass-phishing-defense", category: "News", title: "New Phishing Technique Bypasses MFA", excerpt: "Adversary-in-the-middle attacks can bypass traditional MFA. Here is how to stay safe.", date: "2024-12-01" },
+        { slug: "national-public-data-breach-check", category: "Breach Alert", title: "How to Check If Your Data Was in the National Public Data Breach", excerpt: "800 million records exposed including SSNs and addresses. Here is how to check and protect yourself.", date: "2025-08-15" },
+        { slug: "passkeys-what-you-need-to-know", category: "Security Tip", title: "Passkeys Are Here: What You Need to Know", excerpt: "The future of authentication is passwordless. Which services support passkeys and how to set them up.", date: "2026-01-05" },
+        { slug: "mfa-bypass-phishing-defense", category: "News", title: "New Phishing Technique Bypasses MFA", excerpt: "Adversary-in-the-middle attacks can bypass traditional MFA. Here is how to stay safe.", date: "2026-03-01" },
       ],
     },
     faq: {
@@ -246,9 +246,9 @@ export const translations = {
       subtitle: "Alertas de filtraciones recientes, tips de seguridad y consejos prácticos para estar un paso adelante.",
       viewAll: "Ver todas las notas",
       posts: [
-        { slug: "national-public-data-breach-check", category: "Alerta", title: "Cómo verificar si tus datos están en la filtración de National Public Data", excerpt: "800 millones de registros expuestos incluyendo SSNs y direcciones. Así podés verificar y protegerte.", date: "2024-08-15" },
-        { slug: "passkeys-what-you-need-to-know", category: "Tip", title: "Passkeys: lo que necesitás saber", excerpt: "El futuro de la autenticación es sin contraseñas. Qué servicios ya las soportan y cómo configurarlas.", date: "2024-10-05" },
-        { slug: "mfa-bypass-phishing-defense", category: "Noticias", title: "Nueva técnica de phishing que evade MFA", excerpt: "Los ataques adversary-in-the-middle pueden evadir MFA tradicional. Así podés protegerte.", date: "2024-12-01" },
+        { slug: "national-public-data-breach-check", category: "Alerta", title: "Cómo verificar si tus datos están en la filtración de National Public Data", excerpt: "800 millones de registros expuestos incluyendo SSNs y direcciones. Así podés verificar y protegerte.", date: "2025-08-15" },
+        { slug: "passkeys-what-you-need-to-know", category: "Tip", title: "Passkeys: lo que necesitás saber", excerpt: "El futuro de la autenticación es sin contraseñas. Qué servicios ya las soportan y cómo configurarlas.", date: "2026-01-05" },
+        { slug: "mfa-bypass-phishing-defense", category: "Noticias", title: "Nueva técnica de phishing que evade MFA", excerpt: "Los ataques adversary-in-the-middle pueden evadir MFA tradicional. Así podés protegerte.", date: "2026-03-01" },
       ],
     },
     faq: {

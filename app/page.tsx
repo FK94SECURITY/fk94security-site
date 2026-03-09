@@ -114,7 +114,7 @@ export default function Home() {
           <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">{t.tools.title}</h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-muted">{t.tools.subtitle}</p>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {t.tools.items.map((tool, i) => (
+            {t.tools.items.slice(0, 6).map((tool, i) => (
               <Link
                 key={tool.name}
                 href={toolHrefs[i]}
@@ -131,9 +131,9 @@ export default function Home() {
           <div className="mt-8 text-center">
             <Link
               href="/free-resources"
-              className="text-sm font-semibold text-accent transition hover:text-accent-strong"
+              className="rounded-lg border border-line px-6 py-3 text-sm font-semibold text-ink transition hover:border-accent/30 hover:bg-card"
             >
-              {t.tools.kicker}: {t.tools.items.length}+ &rarr;
+              {t.tools.items.length} {t.tools.kicker} &rarr;
             </Link>
           </div>
         </div>

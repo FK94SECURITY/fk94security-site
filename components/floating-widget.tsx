@@ -108,7 +108,7 @@ export function FloatingWidget() {
       >
         {/* Pulse ring */}
         {!isOpen && (
-          <span className="absolute inset-0 rounded-full bg-accent/40 animate-[pulse-ring_2s_ease-out_infinite]" />
+          <span className="absolute inset-0 rounded-full bg-accent/40 animate-[pulse-ring_2s_ease-out_3]" />
         )}
         {/* Icon */}
         {isOpen ? (

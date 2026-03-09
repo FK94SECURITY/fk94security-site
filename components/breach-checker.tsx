@@ -206,8 +206,30 @@ export function BreachChecker() {
 
       if (!res.ok) throw new Error("API error");
 
-      const data = (await res.json()) as BreachResult;
-      setResult({ ...data, isDemo: false });
+      const data = await res.json();
+      const isDemo = data.demo === true;
+
+      // Map API response (HIBP/XposedOrNot format) to component format
+      const breaches: Breach[] = Array.isArray(data.breaches)
+        ? data.breaches.map((b: Record<string, unknown>) => ({
+            name: (b.Name as string) || (b.name as string) || "Unknown",
+            date: (b.BreachDate as string) || (b.date as string) || "",
+            exposedData: Array.isArray(b.DataClasses)
+              ? (b.DataClasses as string[])
+              : Array.isArray(b.exposedData)
+                ? (b.exposedData as string[])
+                : [],
+            description: (b.Description as string) || (b.description as string) || "",
+            recordCount: (b.PwnCount as number) || (b.recordCount as number) || 0,
+          }))
+        : [];
+
+      setResult({
+        email,
+        breachCount: breaches.length,
+        breaches,
+        isDemo,
+      });
     } catch {
       // API unavailable - fall back to demo mode
       setResult(getMockResult(email));
