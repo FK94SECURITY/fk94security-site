@@ -18,6 +18,11 @@ const toolHrefs = [
   "/free-resources/mfa-compare",
   "/free-resources/exposure-self-check",
   "/free-resources/incident-triage",
+  "/free-resources/password-breach",
+  "/free-resources/dns-scanner",
+  "/free-resources/email-analyzer",
+  "/free-resources/username-osint",
+  "/free-resources/website-scanner",
 ];
 
 const serviceIcons = [

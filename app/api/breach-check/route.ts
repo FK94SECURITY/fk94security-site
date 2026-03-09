@@ -2,11 +2,11 @@ import { NextResponse } from "next/server";
 
 /**
  * Breach check API route.
- * Uses HaveIBeenPwned API v3 (k-anonymity model for passwords is free,
- * email breach check requires API key at $3.50/month).
  *
- * Set HIBP_API_KEY in environment variables to enable live lookups.
- * Without it, returns demo data so the tool still works.
+ * Priority chain:
+ * 1. HaveIBeenPwned API v3 (if HIBP_API_KEY is set, $3.50/month)
+ * 2. XposedOrNot API (free, no key required)
+ * 3. Demo mode (mock data fallback)
  */
 
 type BreachResult = {
@@ -19,35 +19,76 @@ type BreachResult = {
   IsVerified: boolean;
 };
 
-const MOCK_BREACHES: BreachResult[] = [
-  {
-    Name: "LinkedIn",
-    BreachDate: "2012-05-05",
-    DataClasses: ["Email addresses", "Passwords"],
-    Description: "In May 2012, LinkedIn had 164 million email addresses and passwords exposed.",
-    LogoPath: "",
-    PwnCount: 164611595,
-    IsVerified: true,
-  },
-  {
-    Name: "Adobe",
-    BreachDate: "2013-10-04",
-    DataClasses: ["Email addresses", "Passwords", "Password hints", "Usernames"],
-    Description: "In October 2013, 153 million Adobe accounts were breached with emails, encrypted passwords, and password hints.",
-    LogoPath: "",
-    PwnCount: 152445165,
-    IsVerified: true,
-  },
-  {
-    Name: "Canva",
-    BreachDate: "2019-05-24",
-    DataClasses: ["Email addresses", "Names", "Passwords", "Usernames"],
-    Description: "In May 2019, the graphic design tool Canva suffered a data breach that impacted 137 million users.",
-    LogoPath: "",
-    PwnCount: 137272116,
-    IsVerified: true,
-  },
-];
+// --- HIBP (paid, gold standard) ---
+async function checkHIBP(email: string, apiKey: string): Promise<BreachResult[] | null> {
+  try {
+    const resp = await fetch(
+      `https://haveibeenpwned.com/api/v3/breachedaccount/${encodeURIComponent(email)}?truncateResponse=false`,
+      {
+        headers: {
+          "hibp-api-key": apiKey,
+          "user-agent": "FK94Security-BreachChecker",
+        },
+      },
+    );
+    if (resp.status === 404) return [];
+    if (!resp.ok) return null;
+    return resp.json();
+  } catch {
+    return null;
+  }
+}
+
+// --- XposedOrNot (free, no key) ---
+async function checkXposedOrNot(email: string): Promise<BreachResult[] | null> {
+  try {
+    const resp = await fetch(
+      `https://api.xposedornot.com/v1/check-email/${encodeURIComponent(email)}`,
+      {
+        headers: { "User-Agent": "FK94Security-BreachChecker" },
+      },
+    );
+
+    if (resp.status === 404) return [];
+
+    if (!resp.ok) return null;
+
+    const data = await resp.json();
+
+    // XposedOrNot returns breaches in ExposedBreaches.breaches_details array
+    if (data?.ExposedBreaches?.breaches_details) {
+      const details = Array.isArray(data.ExposedBreaches.breaches_details)
+        ? data.ExposedBreaches.breaches_details
+        : JSON.parse(data.ExposedBreaches.breaches_details);
+
+      return details.map(
+        (b: {
+          breach: string;
+          domain: string;
+          xposed_date: string;
+          xposed_records: number;
+          xposed_data: string;
+          details: string;
+          logo: string;
+        }) => ({
+          Name: b.breach || b.domain || "Unknown",
+          BreachDate: b.xposed_date || "Unknown",
+          DataClasses: b.xposed_data
+            ? b.xposed_data.split(";").map((s: string) => s.trim()).filter(Boolean)
+            : [],
+          Description: b.details || `Data breach at ${b.breach || b.domain}.`,
+          LogoPath: b.logo || "",
+          PwnCount: b.xposed_records || 0,
+          IsVerified: true,
+        }),
+      );
+    }
+
+    return [];
+  } catch {
+    return null;
+  }
+}
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
@@ -56,42 +97,38 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Valid email required." }, { status: 400 });
   }
 
-  const apiKey = process.env.HIBP_API_KEY;
+  const email = body.email.trim().toLowerCase();
 
-  if (apiKey) {
-    try {
-      const resp = await fetch(
-        `https://haveibeenpwned.com/api/v3/breachedaccount/${encodeURIComponent(body.email)}?truncateResponse=false`,
-        {
-          headers: {
-            "hibp-api-key": apiKey,
-            "user-agent": "FK94Security-BreachChecker",
-          },
-        },
-      );
-
-      if (resp.status === 404) {
-        return NextResponse.json({ breaches: [], demo: false });
-      }
-
-      if (resp.status === 429) {
-        return NextResponse.json(
-          { error: "Rate limited. Please wait a moment and try again." },
-          { status: 429 },
-        );
-      }
-
-      if (!resp.ok) {
-        throw new Error(`HIBP returned ${resp.status}`);
-      }
-
-      const breaches: BreachResult[] = await resp.json();
-      return NextResponse.json({ breaches, demo: false });
-    } catch (error) {
-      console.error("HIBP API error, falling back to demo:", error);
+  // 1. Try HIBP (paid, best data)
+  const hibpKey = process.env.HIBP_API_KEY;
+  if (hibpKey) {
+    const hibpResult = await checkHIBP(email, hibpKey);
+    if (hibpResult !== null) {
+      return NextResponse.json({ breaches: hibpResult, demo: false, source: "hibp" });
     }
   }
 
-  // Demo mode: return mock data
-  return NextResponse.json({ breaches: MOCK_BREACHES, demo: true });
+  // 2. Try XposedOrNot (free)
+  const xonResult = await checkXposedOrNot(email);
+  if (xonResult !== null) {
+    return NextResponse.json({ breaches: xonResult, demo: false, source: "xposedornot" });
+  }
+
+  // 3. Fallback to demo
+  return NextResponse.json({
+    breaches: [
+      {
+        Name: "Service unavailable",
+        BreachDate: "",
+        DataClasses: [],
+        Description:
+          "Breach checking services are temporarily unavailable. Please try again in a few minutes.",
+        LogoPath: "",
+        PwnCount: 0,
+        IsVerified: false,
+      },
+    ],
+    demo: true,
+    source: "fallback",
+  });
 }
