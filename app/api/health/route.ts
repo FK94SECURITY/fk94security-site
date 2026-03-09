@@ -4,7 +4,7 @@ export function GET() {
   return NextResponse.json({
     status: "ok",
     timestamp: new Date().toISOString(),
-    tools: 18,
-    pages: 57,
+    tools: 19,
+    pages: 59,
   });
 }

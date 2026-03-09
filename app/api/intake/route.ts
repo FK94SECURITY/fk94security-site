@@ -3,6 +3,15 @@ import { Resend } from "resend";
 
 import { scoreIntake, type IntakePayload } from "@/lib/intake";
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function isValidPayload(value: unknown): value is IntakePayload {
   if (!value || typeof value !== "object") {
     return false;
@@ -10,15 +19,25 @@ function isValidPayload(value: unknown): value is IntakePayload {
 
   const candidate = value as Record<string, unknown>;
 
-  return (
-    typeof candidate.name === "string" &&
-    typeof candidate.email === "string" &&
-    typeof candidate.countryTimezone === "string" &&
-    typeof candidate.helpType === "string" &&
-    typeof candidate.urgency === "string" &&
-    typeof candidate.usedResources === "string" &&
-    typeof candidate.details === "string"
-  );
+  if (
+    typeof candidate.name !== "string" ||
+    typeof candidate.email !== "string" ||
+    typeof candidate.countryTimezone !== "string" ||
+    typeof candidate.helpType !== "string" ||
+    typeof candidate.urgency !== "string" ||
+    typeof candidate.usedResources !== "string" ||
+    typeof candidate.details !== "string"
+  ) {
+    return false;
+  }
+
+  // Basic email format validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(candidate.email)) {
+    return false;
+  }
+
+  return true;
 }
 
 export async function POST(request: Request) {
@@ -39,18 +58,18 @@ export async function POST(request: Request) {
         from: "FK94 Security <notifications@fk94security.com>",
         to: "info@fk94security.com",
         replyTo: body.email,
-        subject: `New inquiry: ${body.helpType} (${result.fit} fit)`,
+        subject: `New inquiry: ${escapeHtml(body.helpType)} (${result.fit} fit)`,
         html: `
           <h2>New FK94 Security Inquiry</h2>
           <table style="border-collapse:collapse;width:100%;max-width:600px;font-family:sans-serif;">
-            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;width:140px;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">${body.name}</td></tr>
-            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;"><a href="mailto:${body.email}">${body.email}</a></td></tr>
-            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Help type</td><td style="padding:8px;border-bottom:1px solid #eee;">${body.helpType}</td></tr>
-            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Urgency</td><td style="padding:8px;border-bottom:1px solid #eee;">${body.urgency}</td></tr>
-            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Timezone</td><td style="padding:8px;border-bottom:1px solid #eee;">${body.countryTimezone}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;width:140px;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">${escapeHtml(body.name)}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;"><a href="mailto:${escapeHtml(body.email)}">${escapeHtml(body.email)}</a></td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Help type</td><td style="padding:8px;border-bottom:1px solid #eee;">${escapeHtml(body.helpType)}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Urgency</td><td style="padding:8px;border-bottom:1px solid #eee;">${escapeHtml(body.urgency)}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Timezone</td><td style="padding:8px;border-bottom:1px solid #eee;">${escapeHtml(body.countryTimezone)}</td></tr>
           </table>
           <h3 style="margin-top:20px;">Details</h3>
-          <p style="white-space:pre-wrap;background:#f9f9f9;padding:12px;border-radius:6px;font-family:sans-serif;">${body.details}</p>
+          <p style="white-space:pre-wrap;background:#f9f9f9;padding:12px;border-radius:6px;font-family:sans-serif;">${escapeHtml(body.details)}</p>
           <hr style="margin:24px 0;border:none;border-top:1px solid #eee;" />
           <h3>Scoring</h3>
           <table style="border-collapse:collapse;font-family:sans-serif;">

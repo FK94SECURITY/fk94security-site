@@ -8,6 +8,7 @@ export function ContactForm() {
   const f = t.audit.form;
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,7 +21,7 @@ export function ContactForm() {
     e.preventDefault();
     setLoading(true);
     try {
-      await fetch("/api/intake", {
+      const res = await fetch("/api/intake", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -33,12 +34,30 @@ export function ContactForm() {
           details: formData.message,
         }),
       });
+      if (!res.ok) throw new Error("Request failed");
       setSent(true);
     } catch {
-      // silent fail
+      setError(true);
     } finally {
       setLoading(false);
     }
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-xl border border-red-500/30 bg-red-500/5 p-8 text-center">
+        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10">
+          <svg className="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+        </div>
+        <p className="text-lg font-semibold text-ink">Something went wrong. Please try again later.</p>
+        <button
+          onClick={() => setError(false)}
+          className="mt-4 rounded-lg bg-accent px-6 py-2 text-sm font-semibold text-black transition hover:bg-accent-strong"
+        >
+          Try Again
+        </button>
+      </div>
+    );
   }
 
   if (sent) {

@@ -15,6 +15,7 @@ const topics = [
 export function BookingForm() {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,7 +25,7 @@ export function BookingForm() {
     const data = Object.fromEntries(new FormData(form));
 
     try {
-      await fetch("/api/intake", {
+      const res = await fetch("/api/intake", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -37,12 +38,33 @@ export function BookingForm() {
           details: `[BOOKING REQUEST]\nPreferred date: ${data.date}\nPreferred time: ${data.time}\n\n${data.message}`,
         }),
       });
+      if (!res.ok) throw new Error("Request failed");
       setSent(true);
     } catch {
-      setSent(true);
+      setError(true);
     } finally {
       setSending(false);
     }
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center rounded-xl border border-red-500/20 bg-red-500/5 p-12">
+        <div className="text-center">
+          <svg className="mx-auto h-12 w-12 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <p className="mt-4 text-lg font-semibold text-ink">Something went wrong</p>
+          <p className="mt-2 text-sm text-muted">We could not send your request. Please try again.</p>
+          <button
+            onClick={() => setError(false)}
+            className="mt-4 rounded-lg bg-accent px-6 py-2 text-sm font-semibold text-black transition hover:bg-accent-strong"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
   }
 
   if (sent) {
