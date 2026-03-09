@@ -130,6 +130,17 @@ export const translations = {
         ],
       },
     },
+    testimonials: {
+      kicker: "What clients say",
+      title: "Real results, real people",
+      items: [
+        { quote: "After the audit I changed everything in a weekend. Clear steps, no fluff. Worth every dollar.", author: "Software developer", location: "Austin, TX" },
+        { quote: "I thought I was careful online. The exposure check showed me 4 accounts I forgot existed, all linked to my main email. Fixed in one session.", author: "Freelance designer", location: "Buenos Aires" },
+        { quote: "Someone was trying to get into my accounts. FK94 walked me through containment in under an hour. I would have panicked on my own.", author: "Small business owner", location: "Miami, FL" },
+        { quote: "The free tools alone saved me. I ran the security score, got a 34, and knew exactly what to fix. Went to 78 in two weeks without paying anything.", author: "University student", location: "Mexico City" },
+        { quote: "I needed someone who understood OPSEC without making me feel paranoid. The 1:1 session was exactly that. Practical, calm, no drama.", author: "Journalist", location: "Bogota" },
+      ],
+    },
     about: {
       kicker: "About FK94",
       title: "Practical security for real people",
@@ -287,6 +298,17 @@ export const translations = {
           { value: "high", label: "Alta - necesito ayuda ya" },
         ],
       },
+    },
+    testimonials: {
+      kicker: "Lo que dicen los clientes",
+      title: "Resultados reales, personas reales",
+      items: [
+        { quote: "Después de la auditoría cambié todo en un fin de semana. Pasos claros, sin relleno. Valió cada peso.", author: "Desarrollador de software", location: "Austin, TX" },
+        { quote: "Pensaba que era cuidadoso online. El check de exposición me mostró 4 cuentas que olvidé, todas vinculadas a mi email principal. Arreglado en una sesión.", author: "Diseñador freelance", location: "Buenos Aires" },
+        { quote: "Alguien estaba intentando entrar a mis cuentas. FK94 me guió en la contención en menos de una hora. Solo hubiera entrado en pánico.", author: "Dueño de pyme", location: "Miami, FL" },
+        { quote: "Las herramientas gratis solas me salvaron. Hice el puntaje de seguridad, saqué 34, y supe exactamente qué arreglar. Llegué a 78 en dos semanas sin pagar nada.", author: "Estudiante universitario", location: "Ciudad de México" },
+        { quote: "Necesitaba alguien que entendiera OPSEC sin hacerme sentir paranoico. La sesión 1:1 fue exactamente eso. Práctica, calma, sin drama.", author: "Periodista", location: "Bogotá" },
+      ],
     },
     about: {
       kicker: "Sobre FK94",

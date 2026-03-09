@@ -1,18 +1,55 @@
-import type { Metadata } from "next";
+"use client";
 
+import { useLocale } from "@/lib/locale-context";
 import { guides } from "@/content/guides";
 import { guideHighlights, openRepos, templateAssets, toolAssets } from "@/content/resources";
 import { GuideCard } from "@/components/guide-card";
 import { ResourceCard } from "@/components/resource-card";
 import { SectionHeading } from "@/components/section-heading";
 
-export const metadata: Metadata = {
-  title: "Free Resources",
-  description:
-    "Free tools, guides, templates, and open resources to improve your digital privacy and account hygiene.",
+const content = {
+  en: {
+    eyebrow: "Free Resources",
+    heading: "A simpler starting point.",
+    subheading:
+      "Tools, guides, and templates to help you clean up the basics before you ever need private help.",
+    toolsEyebrow: "Tools",
+    toolsTitle: "Core tools",
+    toolsBody: "The fastest way to start.",
+    guidesEyebrow: "Guides",
+    guidesTitle: "Short practical reading",
+    guidesBody: "A few guides to cover the essentials.",
+    templatesEyebrow: "Templates",
+    templatesTitle: "Templates",
+    templatesBody: "Simple assets you can reuse.",
+    openEyebrow: "Open",
+    openTitle: "GitHub",
+    openBody: "Open resources outside the site.",
+  },
+  es: {
+    eyebrow: "Recursos Gratis",
+    heading: "Un punto de partida m\u00e1s simple.",
+    subheading:
+      "Herramientas, gu\u00edas y plantillas para limpiar lo b\u00e1sico antes de necesitar ayuda privada.",
+    toolsEyebrow: "Herramientas",
+    toolsTitle: "Herramientas principales",
+    toolsBody: "La forma m\u00e1s r\u00e1pida de empezar.",
+    guidesEyebrow: "Gu\u00edas",
+    guidesTitle: "Lecturas pr\u00e1cticas y cortas",
+    guidesBody: "Algunas gu\u00edas para cubrir lo esencial.",
+    templatesEyebrow: "Plantillas",
+    templatesTitle: "Plantillas",
+    templatesBody: "Recursos simples que pod\u00e9s reutilizar.",
+    openEyebrow: "Open Source",
+    openTitle: "GitHub",
+    openBody: "Recursos abiertos fuera del sitio.",
+  },
 };
 
 export default function FreeResourcesPage() {
+  const { locale } = useLocale();
+  const t = content[locale];
+
   const featuredGuides = guideHighlights
     .map((highlight) => guides.find((entry) => entry.slug === highlight.slug))
     .filter((guide): guide is (typeof guides)[number] => Boolean(guide))
@@ -22,20 +59,19 @@ export default function FreeResourcesPage() {
     <>
       <section className="pb-18 pt-14 sm:pb-20 sm:pt-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-bold uppercase tracking-[0.34em] text-accent">Free Resources</p>
+          <p className="text-sm font-bold uppercase tracking-[0.34em] text-accent">{t.eyebrow}</p>
           <h1 className="mt-5 max-w-4xl text-5xl font-bold leading-[0.96] text-ink sm:text-6xl">
-            A simpler starting point.
+            {t.heading}
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">
-            Tools, guides, and templates to help you clean up the basics before you ever need
-            private help.
+            {t.subheading}
           </p>
         </div>
       </section>
 
       <section className="section-space pt-0">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow="Tools" title="Core tools" body="The fastest way to start." />
+          <SectionHeading eyebrow={t.toolsEyebrow} title={t.toolsTitle} body={t.toolsBody} />
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {toolAssets.map((resource) => (
               <ResourceCard key={resource.slug} resource={resource} />
@@ -46,7 +82,7 @@ export default function FreeResourcesPage() {
 
       <section className="section-space">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow="Guides" title="Short practical reading" body="A few guides to cover the essentials." />
+          <SectionHeading eyebrow={t.guidesEyebrow} title={t.guidesTitle} body={t.guidesBody} />
           <div className="mt-10 grid gap-4">
             {featuredGuides.map((guide) => (
               <GuideCard key={guide.slug} guide={guide} />
@@ -58,7 +94,7 @@ export default function FreeResourcesPage() {
       <section className="section-space">
         <div className="mx-auto grid max-w-5xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_1fr] lg:px-8">
           <div>
-            <SectionHeading eyebrow="Templates" title="Templates" body="Simple assets you can reuse." />
+            <SectionHeading eyebrow={t.templatesEyebrow} title={t.templatesTitle} body={t.templatesBody} />
             <div className="mt-8 space-y-3">
               {templateAssets.map((resource) => (
                 <div key={resource.slug} className="rounded-xl border border-line bg-card px-5 py-4">
@@ -69,7 +105,7 @@ export default function FreeResourcesPage() {
             </div>
           </div>
           <div>
-            <SectionHeading eyebrow="Open" title="GitHub" body="Open resources outside the site." />
+            <SectionHeading eyebrow={t.openEyebrow} title={t.openTitle} body={t.openBody} />
             <div className="mt-8 space-y-3">
               {openRepos.slice(0, 4).map((repo) => (
                 <a

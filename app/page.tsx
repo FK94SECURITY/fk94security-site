@@ -164,6 +164,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonials */}
+      <section className="section-space border-t border-line/50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent">{t.testimonials.kicker}</p>
+          <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">{t.testimonials.title}</h2>
+          <div className="mt-10 flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+            {t.testimonials.items.map((item, i) => (
+              <div
+                key={i}
+                className="min-w-[320px] max-w-[400px] shrink-0 snap-start rounded-xl border border-line bg-card p-6"
+              >
+                <svg className="mb-4 h-8 w-8 text-accent/30" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M11.3 2.6C6 5.1 2.8 9.7 2.8 15v5.2h7V15H5.6c0-3.8 2.4-7 5.7-8.4L11.3 2.6zm12 0C18 5.1 14.8 9.7 14.8 15v5.2h7V15h-4.2c0-3.8 2.4-7 5.7-8.4L23.3 2.6z" />
+                </svg>
+                <p className="text-sm italic leading-7 text-muted">{item.quote}</p>
+                <div className="mt-5 border-t border-line pt-4">
+                  <p className="text-sm font-semibold text-ink">{item.author}</p>
+                  <p className="text-xs text-muted/70">{item.location}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Blog Preview */}
       <section className="section-space border-t border-line/50 bg-surface/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

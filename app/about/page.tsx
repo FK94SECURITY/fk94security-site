@@ -63,6 +63,42 @@ export default function AboutPage() {
       </section>
 
       <section className="section-space">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Who is behind FK94"
+            title="Built by a practitioner, not a brand."
+            body="Independent security consulting focused on real people, not enterprise sales."
+          />
+          <div className="mt-8 rounded-xl border border-line bg-card p-6 sm:p-8">
+            <div className="space-y-4 text-sm leading-7 text-muted">
+              <p>
+                Founded by a security practitioner with experience in incident response,
+                account recovery, and operational security for individuals.
+              </p>
+              <p>
+                Background in financial technology, crypto security, and personal privacy consulting.
+              </p>
+              <p>
+                Based in Buenos Aires. Serving clients in the US, Latin America, and worldwide.
+              </p>
+            </div>
+          </div>
+          <div className="mt-6 grid grid-cols-3 gap-4">
+            {[
+              { value: "50+", label: "Audits completed" },
+              { value: "18", label: "Free tools built" },
+              { value: "24h", label: "Average response" },
+            ].map((stat) => (
+              <div key={stat.label} className="rounded-xl border border-line bg-card px-4 py-5 text-center">
+                <p className="text-2xl font-bold text-accent">{stat.value}</p>
+                <p className="mt-1 text-xs text-muted">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-space">
         <div className="mx-auto grid max-w-5xl gap-6 px-4 sm:grid-cols-2 sm:px-6 lg:px-8">
           <div className="rounded-xl border border-line bg-card p-6">
             <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">We help with</p>
