@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Providers } from "./providers";
 import "./globals.css";
@@ -25,9 +27,6 @@ export const metadata: Metadata = {
   },
   description:
     "Free security tools, expert guides, and private 1:1 consulting. Protect your accounts, reduce exposure, and stay ahead of threats.",
-  verification: {
-    google: "GOOGLE_SITE_VERIFICATION_TOKEN_HERE",
-  },
   openGraph: {
     title: "FK94 Security | Personal Security & OPSEC Services",
     description:
@@ -48,12 +47,8 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${jetbrains.variable} bg-background text-foreground antialiased`}>
         <Providers>{children}</Providers>
-        <Script
-          defer
-          data-domain="fk94security.com"
-          src="https://plausible.io/js/script.js"
-          strategy="afterInteractive"
-        />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
