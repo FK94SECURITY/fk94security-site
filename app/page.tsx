@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useLocale } from "@/lib/locale-context";
 import { ContactForm } from "@/components/contact-form";
 import { FaqSection } from "@/components/faq-section";
+import { EmailCapture } from "@/components/email-capture";
 
 const toolHrefs = [
   "/free-resources/breach-checker",
@@ -38,8 +39,45 @@ const serviceIcons = [
 export default function Home() {
   const { t } = useLocale();
 
+  const jsonLdOrg = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "FK94 Security",
+    url: "https://fk94security.com",
+    logo: "https://fk94security.com/logo.png",
+    description: "Free security tools, expert guides, and private 1:1 consulting. Protect your accounts, reduce exposure, and stay ahead of threats.",
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "info@fk94security.com",
+      contactType: "customer service",
+    },
+    sameAs: [],
+  };
+
+  const jsonLdWebsite = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "FK94 Security",
+    url: "https://fk94security.com",
+    description: "Personal security and OPSEC services. Free tools, guides, and private consulting.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://fk94security.com/blog?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrg) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
+      />
+
       {/* Hero */}
       <section id="hero" className="relative overflow-hidden pt-4 pb-20 sm:pt-12 sm:pb-28">
         <div className="absolute inset-0 overflow-hidden">
@@ -228,6 +266,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Email Capture */}
+      <EmailCapture variant="full" />
 
       {/* Contact */}
       <section id="contact" className="section-space border-t border-line/50 bg-surface/30">

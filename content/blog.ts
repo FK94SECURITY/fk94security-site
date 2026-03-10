@@ -18,6 +18,144 @@ export const blogCategories = [
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "why-smbs-are-prime-targets",
+    title: "Why Small Businesses Are Prime Targets for Cyberattacks in 2026",
+    excerpt:
+      "43% of cyberattacks target small businesses, but only 14% are prepared. Here is why SMBs are attractive targets and what they can do about it.",
+    date: "2024-06-20",
+    category: "news",
+    readTime: "6 min read",
+    content: `
+      <p>There is a persistent myth that cybercriminals only go after large enterprises. The reality is the opposite: according to multiple industry reports, 43% of cyberattacks target small and medium businesses. And the reason is simple: SMBs typically have weaker defenses, less security awareness, and fewer resources to detect and respond to breaches.</p>
+
+      <h2>Why attackers prefer small targets</h2>
+      <p>Large enterprises invest millions in security teams, tools, and monitoring. Small businesses often have no dedicated security staff at all. The IT admin, if one exists, is handling everything from printer jams to server maintenance. Security is one of many responsibilities, not the primary focus.</p>
+      <p>This creates predictable patterns that attackers exploit:</p>
+      <ul>
+        <li><strong>No MFA:</strong> Most SMBs do not enforce multi-factor authentication. A single phished password gives full access.</li>
+        <li><strong>Unpatched systems:</strong> Updates are deferred because they interrupt work. Known vulnerabilities remain open for months.</li>
+        <li><strong>No monitoring:</strong> Without logging or alerting, an attacker can operate inside the network for weeks or months before anyone notices.</li>
+        <li><strong>Shared credentials:</strong> Teams share passwords via chat, sticky notes, or spreadsheets.</li>
+        <li><strong>No incident response plan:</strong> When something happens, there is no playbook. The response is improvised and often makes things worse.</li>
+      </ul>
+
+      <h2>The real cost</h2>
+      <p>The average cost of a data breach for a small business is $120,000 to $200,000. For many SMBs, this is an existential threat. 60% of small businesses that suffer a significant cyberattack close within six months, not because the attack itself is catastrophic, but because the recovery costs, reputation damage, and operational disruption are too much to absorb.</p>
+
+      <h2>What SMBs can do today</h2>
+      <p>The good news is that the most impactful security improvements are also the cheapest:</p>
+      <ol>
+        <li><strong>Enable MFA everywhere.</strong> This single step prevents the majority of account compromises.</li>
+        <li><strong>Run a security audit.</strong> You cannot fix what you do not know about. Even a basic external assessment reveals critical gaps.</li>
+        <li><strong>Implement DMARC.</strong> Prevent your domain from being spoofed for phishing. This protects both you and your clients.</li>
+        <li><strong>Close ex-employee accounts.</strong> Every inactive account with access is a potential entry point.</li>
+        <li><strong>Train your team.</strong> One phishing simulation per quarter costs almost nothing and dramatically reduces click rates over time.</li>
+      </ol>
+
+      <p>Security does not require an enterprise budget. It requires attention, basic hygiene, and the willingness to take it seriously before an incident forces you to.</p>
+    `,
+  },
+  {
+    slug: "dmarc-explained-for-business-owners",
+    title: "DMARC Explained: Why Your Business Email Is Probably Not Protected",
+    excerpt:
+      "If you have not configured DMARC, anyone can send emails as your company. Here is what DMARC is, why it matters, and how to set it up in 30 minutes.",
+    date: "2024-09-12",
+    category: "security-tip",
+    readTime: "7 min read",
+    content: `
+      <p>Here is a question that surprises most business owners: can someone send an email that looks like it comes from your company domain, lands in inboxes, and is virtually indistinguishable from a real email? If you have not configured DMARC, the answer is yes.</p>
+
+      <h2>What is DMARC?</h2>
+      <p>DMARC (Domain-based Message Authentication, Reporting & Conformance) is an email authentication protocol that tells receiving email servers what to do when they get a message claiming to be from your domain. Without DMARC, there is no policy: the receiving server has to guess whether the email is legitimate.</p>
+      <p>DMARC builds on two existing protocols:</p>
+      <ul>
+        <li><strong>SPF (Sender Policy Framework):</strong> Specifies which mail servers are authorized to send email on behalf of your domain.</li>
+        <li><strong>DKIM (DomainKeys Identified Mail):</strong> Adds a cryptographic signature to emails that proves they were not tampered with in transit.</li>
+      </ul>
+      <p>DMARC ties them together with a policy that says: "If an email fails both SPF and DKIM checks, do X." Where X can be nothing (monitor only), quarantine (send to spam), or reject (block entirely).</p>
+
+      <h2>Why this matters for your business</h2>
+      <p>Without DMARC, an attacker can:</p>
+      <ul>
+        <li>Send phishing emails to your clients that appear to come from your domain</li>
+        <li>Send fake invoices from your "accounting department" with different bank details</li>
+        <li>Impersonate your CEO to trick employees into transferring money or sharing credentials</li>
+        <li>Damage your brand reputation when your domain shows up in spam and phishing campaigns</li>
+      </ul>
+      <p>These are not hypothetical scenarios. Email spoofing is one of the most common attack vectors in business email compromise (BEC), which cost businesses $2.7 billion in 2023 according to the FBI.</p>
+
+      <h2>How to check your current status</h2>
+      <p>You can check your DMARC status for free using our DNS Scanner tool, or any online DMARC checker. Look up the TXT record for <code>_dmarc.yourdomain.com</code>. If no record exists, you have no DMARC protection.</p>
+
+      <h2>How to implement DMARC</h2>
+      <p>The implementation follows three phases:</p>
+      <ol>
+        <li><strong>Start with monitoring (p=none):</strong> Add a DMARC record with policy "none" and a reporting address. This lets you see who is sending email as your domain without blocking anything. Run this for 2-4 weeks.</li>
+        <li><strong>Move to quarantine (p=quarantine):</strong> Once you have confirmed that all legitimate senders pass SPF/DKIM checks, change the policy to quarantine. Spoofed emails go to spam.</li>
+        <li><strong>Enforce reject (p=reject):</strong> The final step. Spoofed emails are blocked entirely. Your domain is now protected.</li>
+      </ol>
+
+      <h2>Common mistakes</h2>
+      <ul>
+        <li><strong>Jumping straight to reject:</strong> If your SPF or DKIM is not configured correctly, you will block your own legitimate emails.</li>
+        <li><strong>Forgetting third-party senders:</strong> If you use services like Mailchimp, HubSpot, or Google Workspace, they need to be included in your SPF record and configured with DKIM.</li>
+        <li><strong>Never moving past monitoring:</strong> Many organizations set p=none and forget about it. Monitoring without enforcement provides no protection.</li>
+      </ul>
+
+      <p>DMARC is free to implement, takes about 30 minutes of DNS configuration, and is one of the highest-impact security improvements any business can make. If you have not done it yet, start today.</p>
+    `,
+  },
+  {
+    slug: "security-audit-what-to-expect",
+    title: "What Actually Happens During a Security Audit?",
+    excerpt:
+      "If you have never been through a security audit, the process can seem opaque. Here is exactly what we do, what we look at, and what you get at the end.",
+    date: "2025-01-15",
+    category: "security-tip",
+    readTime: "8 min read",
+    content: `
+      <p>A security audit is not a pentest where someone tries to break into your network. For most SMBs, it is something far more practical: a systematic review of your digital infrastructure to find the gaps that an attacker would exploit and give you a clear plan to fix them.</p>
+
+      <h2>Before the audit: reconnaissance</h2>
+      <p>Before we even talk to you, we do external reconnaissance. This is the same thing an attacker would do:</p>
+      <ul>
+        <li><strong>DNS analysis:</strong> We check your domain configuration, MX records, SPF, DKIM, and DMARC. This tells us how well your email is protected against spoofing.</li>
+        <li><strong>OSINT scan:</strong> We search public databases, breach databases, social media, and search engines for any exposed data related to your organization. Employee names, leaked credentials, internal documents that should not be public.</li>
+        <li><strong>Surface scan:</strong> We identify all internet-facing services: websites, VPNs, remote access tools, forgotten subdomains, open ports.</li>
+      </ul>
+      <p>This phase requires zero access from you. By the time we sit down to discuss the audit, we already have a preliminary picture of your exposure.</p>
+
+      <h2>During the audit: active review</h2>
+      <p>With your authorization and access, we review:</p>
+      <ul>
+        <li><strong>Accounts and access:</strong> Who has access to what? Are there ex-employees still active? Is MFA enforced? Are there shared credentials?</li>
+        <li><strong>Devices:</strong> Are laptops encrypted? Are operating systems updated? Is there a firewall? Auto-lock enabled?</li>
+        <li><strong>Network:</strong> Is the WiFi segmented? Is remote access secured? Are there unnecessary services exposed?</li>
+        <li><strong>Cloud:</strong> If you use AWS, Google Cloud, or Azure, we review IAM policies, storage permissions, logging, and encryption.</li>
+        <li><strong>Processes:</strong> Is there an offboarding process? A password policy? An incident response plan?</li>
+      </ul>
+
+      <h2>The phishing test</h2>
+      <p>If included in the scope, we send simulated phishing emails to a group of employees. This is not to shame anyone. It is to measure the organization's baseline susceptibility and identify where awareness training would have the most impact. We track who clicks, who enters credentials, and we use this data to make targeted recommendations.</p>
+
+      <h2>What you get</h2>
+      <p>At the end of the audit, you receive:</p>
+      <ol>
+        <li><strong>Executive Report (3-5 pages):</strong> A non-technical summary for management. Risk level, key findings, and business impact in plain language.</li>
+        <li><strong>Technical Report (15-30 pages):</strong> Detailed findings with evidence (screenshots, configurations, scan results), severity classification, and step-by-step remediation instructions.</li>
+        <li><strong>Remediation Plan:</strong> A prioritized checklist with suggested timeline. Critical items first, then high, medium, and low.</li>
+        <li><strong>Delivery Session (60 min):</strong> A live presentation where we walk through the findings, answer questions, and help you plan next steps.</li>
+        <li><strong>30-Day Follow-up:</strong> We re-check all critical and high findings to verify they were properly remediated. Included at no additional cost.</li>
+      </ol>
+
+      <h2>How long does it take?</h2>
+      <p>A typical SMB audit takes 5 business days from start to delivery. Day 1 is external reconnaissance (no access needed). Days 2-3 are active review with your cooperation. Day 4 is documentation. Day 5 is the delivery session. The follow-up happens at day 30.</p>
+
+      <p>A security audit is not a one-time event. It is the starting point of a security practice. But it is the most important starting point, because you cannot improve what you have not measured.</p>
+    `,
+  },
+  {
     slug: "national-public-data-breach-check",
     title: "How to Check If Your Data Was in the National Public Data Breach",
     excerpt:
@@ -379,6 +517,142 @@ export const blogPosts: BlogPost[] = [
       <p>For your most important accounts (email, financial, cloud storage), set up a hardware security key or passkey as your primary authentication method. This is the only consumer-grade defense that reliably stops AitM phishing.</p>
       <p>For accounts that do not support FIDO2, continue using authenticator apps. They are still effective against traditional phishing, which remains far more common than AitM attacks. But understand that they are not a complete defense against sophisticated, targeted campaigns.</p>
       <p>The authentication landscape is shifting. Passwords are becoming the weakest link, traditional MFA is no longer bulletproof, and phishing-resistant methods like passkeys and hardware keys are becoming essential rather than optional.</p>
+    `,
+  },
+  {
+    slug: "me-hackearon-whatsapp-que-hacer",
+    title: "Me hackearon WhatsApp: guia completa para recuperar tu cuenta y protegerte",
+    excerpt:
+      "Si perdiste acceso a tu WhatsApp o alguien esta usando tu cuenta, esta guia te explica paso a paso como recuperarla, que hacer con tus contactos y como evitar que vuelva a pasar.",
+    date: "2026-03-10",
+    category: "security-tip",
+    readTime: "12 min read",
+    content: `
+      <p>Te despertaste y WhatsApp no funciona. O peor: un amigo te avisa que alguien esta mandando mensajes desde tu numero pidiendo plata. Si te paso algo asi, respira. Esta guia te va a explicar exactamente que hacer, paso a paso, para recuperar tu cuenta, limitar el dano y asegurarte de que no vuelva a pasar.</p>
+
+      <h2>Primero lo primero: confirma que te hackearon</h2>
+      <p>Antes de entrar en panico, revisa si realmente perdiste el control de tu cuenta. Hay dos escenarios principales:</p>
+      <ul>
+        <li><strong>Se cerraron todas tus sesiones:</strong> WhatsApp te deslogueo del celular y cuando intentas entrar te dice que tu numero ya esta registrado en otro dispositivo. Esto significa que alguien registro tu numero en su telefono.</li>
+        <li><strong>Tenes acceso pero algo raro pasa:</strong> Ves mensajes que no mandaste, contactos que te dicen que les pediste plata, o cambios en tu perfil que no hiciste vos. En este caso puede que alguien tenga acceso a WhatsApp Web o a un dispositivo vinculado.</li>
+      </ul>
+      <p>Si estas en el primer escenario, la situacion es mas urgente. Vamos directo a la recuperacion.</p>
+
+      <h2>Paso 1: Recupera tu cuenta inmediatamente</h2>
+      <p>Abri WhatsApp en tu celular e intenta registrarte con tu numero de telefono. WhatsApp te va a mandar un codigo de verificacion por SMS. <strong>Ese codigo es tuyo y de nadie mas. Nunca se lo des a nadie.</strong></p>
+      <p>Cuando ingreses el codigo, la sesion del atacante se cierra automaticamente. Solo puede haber un celular activo por numero.</p>
+      <p>Si el atacante activo la verificacion en dos pasos (un PIN de 6 digitos), WhatsApp te va a pedir ese PIN. Si no lo sabes:</p>
+      <ol>
+        <li>Toca "Olvidaste tu PIN" o "Forgot PIN".</li>
+        <li>Si tenias un email vinculado a la verificacion en dos pasos, WhatsApp te manda un link para desactivar el PIN.</li>
+        <li>Si no tenias email vinculado, vas a tener que esperar 7 dias para poder registrarte sin el PIN. Durante esos 7 dias, el atacante no puede re-verificar tu numero tampoco.</li>
+      </ol>
+      <p>Los 7 dias son una eternidad, pero es el mecanismo de seguridad de WhatsApp. Usalo para hacer todo lo demas que sigue en esta guia.</p>
+
+      <h2>Paso 2: Avisa a tus contactos</h2>
+      <p>Esto es urgente y mucha gente lo pospone por verguenza. No lo hagas. Mientras alguien tiene tu cuenta, esta mandando mensajes a tu nombre pidiendo plata, datos o favores. Cuanto antes avises, menos gente cae.</p>
+      <ul>
+        <li>Manda un mensaje por otra via (Instagram, Telegram, llamada telefonica, SMS) a tus contactos mas cercanos explicando que te hackearon.</li>
+        <li>Pedi que <strong>no transfieran plata</strong> ni respondan mensajes de tu WhatsApp hasta que avises que lo recuperaste.</li>
+        <li>Si tenes grupos importantes, pedile a alguien de confianza que avise en cada grupo.</li>
+      </ul>
+      <p>Un mensaje simple funciona: "Me hackearon WhatsApp. No soy yo el que esta escribiendo. No manden plata ni datos. Los aviso cuando lo recupere."</p>
+
+      <h2>Paso 3: Revisa dispositivos vinculados</h2>
+      <p>Si recuperaste el acceso a tu cuenta, lo primero que tenes que hacer es cerrar todas las sesiones abiertas:</p>
+      <ol>
+        <li>Abri WhatsApp y anda a <strong>Configuracion &gt; Dispositivos vinculados</strong>.</li>
+        <li>Vas a ver una lista de todos los dispositivos conectados (computadoras, tablets, WhatsApp Web).</li>
+        <li>Toca en <strong>cada uno</strong> y selecciona "Cerrar sesion".</li>
+      </ol>
+      <p>Esto cierra cualquier sesion de WhatsApp Web o Desktop que el atacante pueda haber abierto. Hacelo siempre, incluso si pensas que no hay nada raro.</p>
+
+      <h2>Paso 4: Activa la verificacion en dos pasos</h2>
+      <p>Este es el paso mas importante para evitar que te vuelva a pasar. La verificacion en dos pasos agrega un PIN de 6 digitos que WhatsApp pide cada vez que se registra tu numero en un dispositivo nuevo.</p>
+      <ol>
+        <li>Anda a <strong>Configuracion &gt; Cuenta &gt; Verificacion en dos pasos</strong>.</li>
+        <li>Activa la funcion y elegi un PIN de 6 digitos. <strong>No uses tu fecha de nacimiento ni 123456.</strong></li>
+        <li>Agrega un email de recuperacion. Usa un email seguro que solo vos controles.</li>
+      </ol>
+      <p>Sin este PIN, incluso si alguien intercepta tu SMS de verificacion, no puede completar el registro en otro telefono.</p>
+
+      <h2>Como te hackearon: los metodos mas comunes</h2>
+      <p>Entender como paso te ayuda a prevenir que vuelva a ocurrir. Estos son los metodos mas frecuentes en Argentina y Latinoamerica:</p>
+
+      <h3>1. Ingenieria social (el mas comun)</h3>
+      <p>Alguien te contacta haciendose pasar por WhatsApp, tu banco, MercadoLibre, una empresa de delivery, o incluso un conocido. Te piden un "codigo que te llego por SMS por error". Ese codigo es el codigo de verificacion de WhatsApp. Si se lo das, pueden registrar tu numero en su telefono.</p>
+      <p><strong>Regla de oro:</strong> el codigo de verificacion de WhatsApp es como la llave de tu casa. Nunca se lo des a nadie, bajo ninguna circunstancia, sin importar la historia que te cuenten.</p>
+
+      <h3>2. SIM swap (cambio de SIM)</h3>
+      <p>El atacante contacta a tu operador de telefonia (Claro, Personal, Movistar) y convence al operador de transferir tu numero a una SIM nueva. Esto les da acceso a todos tus SMS, incluyendo los codigos de verificacion de WhatsApp.</p>
+      <p>Es mas sofisticado pero cada vez mas comun. La verificacion en dos pasos de WhatsApp te protege contra esto porque aunque tengan tu SIM, no tienen tu PIN.</p>
+
+      <h3>3. Malware en el celular</h3>
+      <p>Apps maliciosas descargadas fuera de las tiendas oficiales (APKs sueltos) pueden leer tus SMS automaticamente y reenviar los codigos al atacante. Esto es mas comun en Android.</p>
+
+      <h3>4. Acceso fisico al celular</h3>
+      <p>Alguien tuvo tu celular desbloqueado por unos minutos y abrio WhatsApp Web en otro dispositivo. Esto les da acceso completo a tu WhatsApp sin que te des cuenta.</p>
+
+      <h2>Paso 5: Asegura tu telefono</h2>
+      <p>Tu WhatsApp es tan seguro como tu celular. Si el celular esta comprometido, nada de lo anterior sirve de mucho.</p>
+      <ul>
+        <li><strong>Bloqueo de pantalla:</strong> Usa un PIN de al menos 6 digitos, o biometria (huella, face ID). No uses patrones de desbloqueo, son muy faciles de adivinar.</li>
+        <li><strong>No instales apps fuera de la tienda oficial.</strong> Ni APKs que te mandan por WhatsApp o Telegram, ni "versiones premium" de apps.</li>
+        <li><strong>Mantene el sistema operativo actualizado.</strong> Las actualizaciones corrigen vulnerabilidades de seguridad.</li>
+        <li><strong>Revisa los permisos de tus apps.</strong> Ninguna app deberia tener acceso a tus SMS salvo tu app de mensajes.</li>
+      </ul>
+      <p>Podes usar nuestra herramienta de <strong>Security Score</strong> para evaluar tu nivel de seguridad actual en 2 minutos, o el <strong>Device Hardening</strong> para un checklist paso a paso segun tu dispositivo.</p>
+
+      <h2>Paso 6: Protege tu linea telefonica</h2>
+      <p>Contacta a tu operador de telefonia y pedi:</p>
+      <ul>
+        <li><strong>Bloqueo de portabilidad no autorizada:</strong> Que no se pueda transferir tu linea sin que vos vayas personalmente con DNI.</li>
+        <li><strong>PIN de seguridad para la cuenta:</strong> Un codigo adicional que se necesita para hacer cambios en tu linea.</li>
+        <li><strong>Alerta de SIM swap:</strong> Que te notifiquen si alguien intenta cambiar tu SIM.</li>
+      </ul>
+      <p>Cada operador tiene procesos distintos, pero todos ofrecen alguna forma de proteccion extra. Llama y pedilo.</p>
+
+      <h2>Que pasa con mis datos y conversaciones</h2>
+      <p>Buenas noticias: WhatsApp usa cifrado de extremo a extremo. Esto significa que el atacante <strong>no puede leer tus mensajes anteriores</strong> porque estan cifrados y la clave esta en tu dispositivo, no en los servidores de WhatsApp.</p>
+      <p>Lo que si puede hacer el atacante:</p>
+      <ul>
+        <li>Ver los mensajes nuevos que llegan mientras tiene tu cuenta.</li>
+        <li>Mandar mensajes a tu nombre.</li>
+        <li>Ver tu lista de contactos y grupos.</li>
+        <li>Ver tu foto de perfil y estado.</li>
+      </ul>
+      <p>Cuando recuperes tu cuenta, podes restaurar tu backup de conversaciones si tenias uno configurado (Google Drive en Android, iCloud en iPhone).</p>
+
+      <h2>Si alguien ya mando plata pensando que eras vos</h2>
+      <p>Lamentablemente es muy comun. Si algun contacto transfirio dinero al estafador:</p>
+      <ol>
+        <li>Que contacte a su banco inmediatamente para intentar frenar o revertir la transferencia.</li>
+        <li>Que haga la denuncia en la comisaria o fiscalia correspondiente. En Argentina se puede hacer denuncia online en muchas jurisdicciones.</li>
+        <li>Que reporte la cuenta bancaria receptora al banco para que la bloqueen.</li>
+        <li>Guarda capturas de todo: los mensajes del estafador, los comprobantes de transferencia, todo sirve como evidencia.</li>
+      </ol>
+
+      <h2>Hace un chequeo general de tu seguridad</h2>
+      <p>Si te hackearon WhatsApp, es probable que otros aspectos de tu seguridad digital tambien necesiten atencion. Te recomendamos:</p>
+      <ul>
+        <li><strong>Breach Checker:</strong> Verifica si tu email aparece en filtraciones de datos conocidas. Si tu mail esta filtrado, cambia la contrasena de todos los servicios donde lo uses.</li>
+        <li><strong>Security Score:</strong> Evalua tu nivel de seguridad general en 2 minutos y recibi recomendaciones personalizadas.</li>
+        <li><strong>Account Hardening Planner:</strong> Genera un plan paso a paso para endurecer todas tus cuentas, no solo WhatsApp.</li>
+      </ul>
+      <p>Todas estas herramientas son gratuitas y corren 100% en tu navegador. Tus datos nunca salen de tu dispositivo.</p>
+
+      <h2>Resumen: checklist rapido</h2>
+      <ul>
+        <li>Registra tu numero de vuelta en WhatsApp con el codigo SMS.</li>
+        <li>Cierra todos los dispositivos vinculados.</li>
+        <li>Avisa a tus contactos por otra via.</li>
+        <li>Activa la verificacion en dos pasos con un PIN seguro y email.</li>
+        <li>Revisa y asegura tu celular (bloqueo, apps, permisos).</li>
+        <li>Contacta a tu operador para bloquear cambios de SIM no autorizados.</li>
+        <li>Hace un chequeo general con las herramientas gratuitas de FK94.</li>
+      </ul>
+
+      <p>Que te hackeen WhatsApp es estresante, pero es solucionable. Lo importante es actuar rapido, no entrar en panico, y aprovechar para mejorar tu seguridad general. Si necesitas ayuda personalizada con tu situacion, podes solicitar una sesion 1:1 con FK94 Security.</p>
     `,
   },
 ];
